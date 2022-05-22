@@ -40,12 +40,5 @@ public class UserManage implements Controller{
         myList.add(new User(2,"321","雷培根","123","",2));
         myList.add(new User(3,"123","林源奇","123","",3));
         myList.add(new User(4,"123","付会柱","123","",2));
-
-        UserDao userDao = new UserDao(myList);
-        tblUser.setItems(myList);
-        colID.setCellValueFactory(c-> new SimpleStringProperty(new Integer("id"));
-//        colName.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
-//        colRealName.setCellValueFactory(cellData -> cellData.getValue().getRealNameProperty());
-//        colRole.setCellValueFactory(cellData -> );
     }
 }
