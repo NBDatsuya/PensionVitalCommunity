@@ -1,0 +1,44 @@
+@startuml
+skinparam defaultFontName "OppoSans M"
+skinparam linetype polyline
+skinparam linetype ortho
+left to right direction
+title 入住管理
+
+actor 管理员
+actor 生活管家
+
+usecase 新增入住
+usecase 修改入住
+usecase 查询入住
+
+管理员-->新增用户
+管理员-->删除用户
+管理员-->编辑用户
+管理员-->查询用户
+
+rectangle 新增入住{
+    usecase 自动获取ID
+    新增用户 .> 自动获取ID : include
+    usecase 填写各种信息
+    新增用户 ..> 填写各种信息 : include
+    usecase 设置用户权限
+    新增用户 ..> 设置用户权限 :include
+}
+
+rectangle 编辑用户{
+     usecase 修改各种信息
+     编辑用户 ..> 修改各种信息 : include
+     usecase 修改用户权限
+     编辑用户 ..> 修改用户权限 :include
+ }
+
+ rectangle 查询入住{
+    usecase 选择查询方式
+    usecase 输入关键词
+    usecase 查询
+    查询用户 .> 选择查询方式
+    选择查询方式 --> 输入关键词
+    输入关键词 -->查询
+ }
+@enduml

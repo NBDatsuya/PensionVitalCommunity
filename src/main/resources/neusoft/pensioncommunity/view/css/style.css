@@ -1,0 +1,43 @@
+.tab-pane > .tab-header-area {
+  -fx-padding: 0;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+  -fx-background-color: #9c27b0, white;
+  -fx-background-insets: 0, 0 0 1px 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab {
+  -fx-background-color: white;
+  -fx-background-insets: 0 0 1px 0;     
+  -fx-padding: 1.5em 1em;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab >.tab-container >.tab-label {
+  -fx-text-fill: #ff67c8;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+  -fx-background-color: #9c27b0, white;
+  -fx-background-insets: 0, 0 0 2px 0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected >.tab-container >.tab-label {
+  -fx-text-fill: #9c27b0;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected >.tab-container >.focus-indicator {
+  -fx-opacity: 0;
+}
+
+.table-view{
+  -fx-fixed-cell-size: 1;
+}
+.table-view > .column-header-background > .nested-column-header>.column-header{
+  -fx-background-color: white;
+  
+}
+
+.table-view > .column-header-background > .nested-column-header>.column-header>.table-view-labal{
+  -fx-text-fill:#9c27b0;
+}

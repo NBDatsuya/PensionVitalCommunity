@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+skinparam defaultFontName "OppoSans M"
+skinparam linetype polyline
+skinparam linetype ortho
+left to right direction
+title 用户管理
+
+actor 管理员
+usecase 新增用户
+usecase 删除用户
+usecase 编辑用户
+usecase 查询用户
+
+管理员-->新增用户
+管理员-->删除用户
+管理员-->编辑用户
+管理员-->查询用户
+
+rectangle 新增用户{
+    usecase 自动获取ID
+    新增用户 .> 自动获取ID : include
+    usecase 填写各种信息
+    新增用户 ..> 填写各种信息 : include
+    usecase 设置用户权限
+    新增用户 ..> 设置用户权限 :include
+}
+
+rectangle 删除用户{
+    usecase 将对应用户其他信息清除 as case1
+    删除用户 .....> case1 : 如果该用户与长者数据有关联
+    usecase 直接删除
+    删除用户 .....> 直接删除 : 如果该用户与长者数据无关联
+}
+
+rectangle 编辑用户{
+     usecase 修改各种信息
+     编辑用户 ..> 修改各种信息 : include
+     usecase 修改用户权限
+     编辑用户 ..> 修改用户权限 :include
+ }
+
+ rectangle 查询用户{
+    usecase 选择查询方式
+    usecase 输入关键词
+    usecase 查询
+    查询用户 .> 选择查询方式
+    选择查询方式 --> 输入关键词
+    输入关键词 -->查询
+ }
+@enduml

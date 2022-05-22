@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="apModule" prefHeight="524.0" prefWidth="744.0" style="-fx-background-color: #B892C8;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="neusoft.pensioncommunity.controller.UserManage">
+   <children>
+      <TabPane layoutX="25.0" layoutY="20.0" prefHeight="490.0" prefWidth="702.0" tabClosingPolicy="ALL_TABS">
+        <tabs>
+          <Tab closable="false" text="用户一览">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #E9CFEC;">
+                     <children>
+                        <Pane layoutX="15.0" layoutY="7.0" prefHeight="42.0" prefWidth="676.0" style="-fx-background-color: #7A5DC7;">
+                           <children>
+                              <TextField layoutX="439.0" layoutY="8.0" />
+                              <JFXButton layoutX="610.0" layoutY="7.0" style="-fx-background-color: #9E7BFF;" text="查  询" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <ComboBox layoutX="302.0" layoutY="9.0" prefHeight="23.0" prefWidth="72.0" />
+                              <Label layoutX="230.0" layoutY="11.0" text="查询方式：" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="387.0" layoutY="11.0" text="关键字：" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="35.0" layoutY="8.0" text="用户查询" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <TableView fx:id="tblUser" layoutX="14.0" layoutY="92.0" prefHeight="336.0" prefWidth="678.0">
+                          <columns>
+                            <TableColumn fx:id="colID" prefWidth="88.79998779296875" text="ID" />
+                              <TableColumn fx:id="colName" prefWidth="190.4000244140625" text="登录名" />
+                            <TableColumn fx:id="colRealName" prefWidth="236.800048828125" text="姓名" />
+                              <TableColumn fx:id="colRole" prefWidth="215.99993896484375" text="用户角色" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <JFXButton layoutX="15.0" layoutY="56.0" style="-fx-background-color: #9E7BFF;" text="新增用户" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="106.0" layoutY="56.0" style="-fx-background-color: #9E7BFF;" text="修改用户" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="197.0" layoutY="56.0" style="-fx-background-color: #9E7BFF;" text="删除用户" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="599.0" layoutY="56.0" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #9E7BFF;" text="查看服务..." textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="新建用户">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #E9CFEC;">
+                     <children>
+                        <GridPane alignment="TOP_CENTER" layoutX="180.0" layoutY="49.0" prefHeight="274.0" prefWidth="370.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.799951171875" minWidth="10.0" prefWidth="127.000048828125" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="202.199951171875" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="33.00000610351562" minHeight="10.0" prefHeight="33.00000610351562" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="41.199975585937494" minHeight="10.0" prefHeight="41.199975585937494" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="102.39997558593748" minHeight="10.0" prefHeight="50.800024414062506" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="84.00003662109376" minHeight="10.0" prefHeight="32.600006103515625" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="84.00003662109376" minHeight="10.0" prefHeight="34.99999389648437" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="84.00003662109376" minHeight="10.0" prefHeight="41.59998779296876" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="98.0" text="用户编号" textAlignment="CENTER" textFill="#590176">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="20.0" prefWidth="182.0" text="User.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="102.0" text="登录名" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="98.0" text="真实姓名" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="101.0" text="密码" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="106.0" text="用户角色" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="7">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField focusColor="#c209ff" prefHeight="30.0" prefWidth="125.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField focusColor="#c209ff" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></JFXTextField>
+                              <JFXTextField focusColor="#c209ff" prefHeight="30.0" prefWidth="121.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></JFXTextField>
+                              <JFXComboBox prefHeight="23.0" prefWidth="238.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="57.0" prefWidth="414.0" text="密码必须为8个字符及以上&#10;且为字母、数字和特殊符号的组合" textAlignment="CENTER" textFill="#bf001d" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="101.0" text="出生日期" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="101.0" text="联系方式" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField focusColor="#c209ff" prefHeight="30.0" prefWidth="121.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXTextField>
+                              <JFXTextField focusColor="#c209ff" prefHeight="30.0" prefWidth="121.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </JFXTextField>
+                           </children>
+                        </GridPane>
+                        <JFXButton contentDisplay="CENTER" layoutX="244.0" layoutY="339.0" prefHeight="34.0" prefWidth="106.0" text="保存" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="365.0" layoutY="339.0" prefHeight="34.0" prefWidth="142.0" text="取消" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

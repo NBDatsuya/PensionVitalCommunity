@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="apModule" prefHeight="524.0" prefWidth="744.0" style="-fx-background-color: #B892C8;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="neusoft.pensioncommunity.controller.UserConfig">
+    <children>
+        <ImageView fx:id="imgUAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="157.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@pic/test_avatar.jpg" />
+            </image>
+        </ImageView>
+        <GridPane alignment="TOP_CENTER" layoutX="355.0" layoutY="134.0" prefHeight="222.0" prefWidth="250.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" minWidth="10.0" prefWidth="88.00001220703125" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.60003662109375" minWidth="10.0" prefWidth="113.59998779296878" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="50.599981689453124" minHeight="10.0" prefHeight="18.800003051757812" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="99.4" minHeight="10.0" prefHeight="25.3999755859375" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="91.40001373291017" minHeight="0.0" prefHeight="21.800001525878905" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="154.80000762939454" minHeight="10.0" prefHeight="76.9999984741211" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="用户名" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label text="真实姓名" textFill="WHITE" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label text="用户权限" textFill="WHITE" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lblUName" text="User.name" textFill="WHITE" GridPane.columnIndex="1">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lblURName" text="User.realName" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lblURole" text="User.role" textFill="#6d00fc" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <Label text="可使用功能" textFill="WHITE" GridPane.rowIndex="3">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Label>
+                <ListView fx:id="lstUAccess" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B892C8;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            </children>
+        </GridPane>
+        <JFXButton layoutX="189.0" layoutY="319.0" style="-fx-background-color: #893BFF;" text="修改密码" textFill="WHITE" />
+    </children>
+</AnchorPane>
