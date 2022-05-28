@@ -1,50 +1,61 @@
 package neusoft.pensioncommunity.model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.time.LocalDate;
+
+@ToString
 @Getter
 @Setter
-@AllArgsConstructor
-public class User extends Model {
+@NoArgsConstructor
+public class User extends Model{
+
     private int id;
     private String name;
-    private String realName;
     private String password;
-    private String avatar;
-
     /**
-     * 1 = Admin
-     * 2 = Steward
-     * 3 = Logistic
+     * 0 = Admin
+     * 1 = Steward
+     * 2 = Logistic
      */
     private int role;
 
-//    private final IntegerProperty idProperty;
-//    private final StringProperty nameProperty;
-//    private final StringProperty realNameProperty;
-//    private final StringProperty passwordProperty;
-//    private final StringProperty avatarProperty;
-//    private final IntegerProperty roleProperty;
+    private String realName;
 
+    /**
+     * 0 = Other
+     * 1 = Male
+     * 2 = Female
+     */
+    private int gender;
+    private String tel;
+    private LocalDate birthDay;
 
-    public static String valueOfRole(Integer role) {
+    public static String valueOfRole(int role) {
         switch (role) {
-            case 1:
+            case 0:
                 return "管理员";
-            case 2:
+            case 1:
                 return "生活管家";
-            case 3:
+            case 2:
             default:
                 return "后勤管理";
         }
     }
 
-    @Override
-    public int getID() {
+    public static String valueOfGender(int gender){
+        switch (gender) {
+            case 2:
+            default:
+                return "其他";
+            case 0:
+                return "男";
+            case 1:
+                return "女";
+        }
+    }
+    public int getId() {
         return id;
     }
+
 }

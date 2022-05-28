@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="apModule" prefHeight="524.0" prefWidth="744.0" style="-fx-background-color: #B892C8;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="neusoft.pensioncommunity.controller.UserService">
+   <children>
+      <AnchorPane layoutX="26.0" layoutY="14.0" minHeight="0.0" minWidth="0.0" prefHeight="152.0" prefWidth="690.0" style="-fx-background-color: #E9CFEC;">
+         <children>
+            <ImageView fx:id="imgUAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pic/test_avatar.jpg" />
+               </image>
+            </ImageView>
+            <GridPane layoutX="149.0" layoutY="34.0" prefHeight="95.0" prefWidth="430.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" minWidth="10.0" prefWidth="83.20001220703125" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="146.79998779296875" minWidth="10.0" prefWidth="130.8000244140625" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.79996337890626" minWidth="10.0" prefWidth="85.40001220703124" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.20003662109372" minWidth="10.0" prefWidth="138.99998779296874" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="50.599981689453124" minHeight="10.0" prefHeight="18.800003051757812" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="99.4" minHeight="10.0" prefHeight="25.3999755859375" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="91.40001373291017" minHeight="0.0" prefHeight="21.800001525878905" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="用户名" textFill="#4e4646">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="真实姓名" textFill="#4e4646" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="用户权限" textFill="#4e4646" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblUName" text="User.name" textFill="#4e4646" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblURName" text="User.realName" textFill="#4e4646" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblURole" text="后勤管理" textFill="#6d00fc" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="性别" textFill="#4e4646" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="联系方式" textFill="#4e4646" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="出生年月" textFill="#4e4646" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblUName2" text="User.Gender" textFill="#4e4646" GridPane.columnIndex="3">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblUName3" text="User.Tel" textFill="#4e4646" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblUName4" text="User.BirthDay" textFill="#4e4646" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <Label layoutX="318.0" layoutY="14.0" text="编号：" textFill="#4e4646">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblUName1" layoutX="364.0" layoutY="13.0" text="User.Id" textFill="#4e4646">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnSearch" layoutX="586.0" layoutY="53.0" onAction="#eventSearch" prefHeight="45.0" prefWidth="88.0" style="-fx-background-color: #9E7BFF;" text="返  回" textFill="WHITE">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tblUser" editable="true" layoutX="27.0" layoutY="185.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#eventSelectItem" prefHeight="322.0" prefWidth="690.0">
+         <columns>
+            <TableColumn fx:id="colID" prefWidth="66.4000244140625" text="班车编号">
+               <cellValueFactory>
+                  <PropertyValueFactory property="ID" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="colName" prefWidth="75.20001220703125" text="班车代码" />
+            <TableColumn fx:id="colRealName" prefWidth="61.60003662109375" text="班车名称" />
+            <TableColumn fx:id="colGender" prefWidth="139.20001220703125" text="方向" />
+            <TableColumn fx:id="colRole" prefWidth="96.79998779296875" text="车次" />
+            <TableColumn fx:id="colTel" prefWidth="111.99993896484375" text="市场" />
+            <TableColumn fx:id="colBirth" prefWidth="115.20001220703125" text="乘客数" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

@@ -5,6 +5,9 @@ import javafx.scene.control.Label;
 
 import neusoft.pensioncommunity.model.User;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 public class UserConfig implements Controller {
 
     @FXML
@@ -24,12 +27,12 @@ public class UserConfig implements Controller {
         lblUName.setText(currentUser.getName());
         lblURName.setText(currentUser.getRealName());
         lblURole.setText(User.valueOfRole(currentUser.getRole()));
-
-        load();
     }
+
 
     @Override
-    public void load() {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
 }

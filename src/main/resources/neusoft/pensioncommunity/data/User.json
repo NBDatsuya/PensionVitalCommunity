@@ -1,0 +1,30 @@
+[
+      {
+            "id": 0,
+            "name": "123",
+            "password": "123",
+            "role": 0,
+            "realName": "admin",
+            "gender":0,
+            "tel": "1145141919810",
+            "birthDay": "2022-05-20"
+      },{
+            "id": 1,
+            "name": "233",
+            "password": "233",
+            "role": 1,
+            "realName": "孟教授",
+            "gender":0,
+            "tel": "1145141919810",
+            "birthDay": "2002-01-05"
+      },{
+            "id": 2,
+            "name": "chichi",
+            "password": "chichi",
+            "role": 2,
+            "realName": "张赤澈",
+            "gender":1,
+            "tel": "1145141919810",
+            "birthDay": "2002-05-20"
+      }
+]

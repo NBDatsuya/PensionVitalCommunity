@@ -2,14 +2,18 @@ package neusoft.pensioncommunity.dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import lombok.Getter;
 import neusoft.pensioncommunity.model.*;
+import neusoft.pensioncommunity.utils.FileUtil;
+import neusoft.pensioncommunity.utils.GsonUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao implements Dao<User> {
 
-    private ObservableList<User> daoList = FXCollections.observableArrayList();
+    @Getter
+    private static final UserDao instance = new UserDao();
+    private final ObservableList<User> daoList = FXCollections.observableArrayList();
     @Override
     public void add(User item) {
         daoList.add(item);
@@ -23,7 +27,7 @@ public class UserDao implements Dao<User> {
     @Override
     public User search(int id) {
         for(User item : daoList)
-            if (item.getID() == id)
+            if (item.getId() == id)
                 return item;
 
         return null;
@@ -35,24 +39,34 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public List<User> getAll() {
+    public ObservableList<User> getAll() {
         return daoList;
     }
 
     @Override
     public void load() {
-
+        String buffer = FileUtil.readFile("User.json");
+        this.daoList.addAll(GsonUtil.getGson().fromJson(
+                    buffer,User[].class
+                )
+        );
     }
 
     @Override
     public void save() {
-
+        String serialized = GsonUtil.getGson().toJson(daoList,ObservableList.class);
+        FileUtil.writeFile("User.json",serialized);
     }
 
-    public UserDao(){
+    @Override
+    public int size() {
+        return daoList.size();
+    }
+
+    //searchByDate?
+
+    private UserDao(){
         load();
     }
-    public UserDao(ObservableList<User> subList){
-        this.daoList = subList;
-    }
+
 }

@@ -1,0 +1,65 @@
+@startuml
+skinparam defaultFontName "Resource Han Rounded CN"
+skinparam linetype polyline
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+left to right direction
+title 活力长者管理系统类和类关系图
+
+class User{
+    {field}
+    -Integer id
+    -String name
+    -String realName
+    -String password
+    -Integer role
+    -int gender
+    -String tel
+    -LocalDate birthDay
+    {method}
+    +User()
+    +getId()
+    +getName()
+    +getRealName()
+    +getPassword()
+    +getRole()
+    +getGender()
+    +getTel()
+    +getBirthDay
+    +setId()
+    +setName()
+    +setRealName()
+    +setPassword()
+    +setRole()
+    +setGender()
+    +setTel()
+    +setBirthDay
+    +valueOfGender()
+    +valueOfRole()
+}
+
+class Bus{
+    {field}
+    -Integer id
+    -String code
+    -String name
+    -Integer direction
+    -String annual
+    -String period
+    -Time timeBegin
+    -Time timeTerminal
+    -Integer countPeople
+}
+
+class Senior{
+    {field}
+    -Integer id
+    -String name
+    -Integer gender
+    -String identity
+    -LocalDate birthDay
+    -String telSelf
+    -String telRelative
+    -User assistant
+}
+@enduml

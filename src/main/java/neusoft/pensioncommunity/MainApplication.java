@@ -5,8 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import neusoft.pensioncommunity.utils.GlobalConfig;
+import neusoft.pensioncommunity.dao.UserDao;
+import neusoft.pensioncommunity.utils.FileUtil;
 
 public class MainApplication extends Application {
 
@@ -22,10 +22,8 @@ public class MainApplication extends Application {
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setOpacity(0.9);
         stage.setTitle(GlobalConfig.TITLE_LOGIN);
         stage.centerOnScreen();
         stage.show();
-
     }
 }

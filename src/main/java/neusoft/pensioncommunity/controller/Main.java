@@ -14,34 +14,31 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 
+import neusoft.pensioncommunity.dao.UserDao;
 import neusoft.pensioncommunity.model.User;
-import neusoft.pensioncommunity.utils.GlobalConfig;
+import neusoft.pensioncommunity.GlobalConfig;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 public class Main implements Controller{
 
-    public User currentUser;
-
+    private final User currentUser = GlobalConfig.currentUser;
     @FXML
     private Label lblUser;
-
     @FXML
     private Label lblStat;
-
     @FXML
     private AnchorPane apMain;
-
     @FXML
     private AnchorPane apChild;
-
     @FXML
     private Pane pnStat;
-
     @FXML
     private ImageView imgAvatar;
 
@@ -62,11 +59,12 @@ public class Main implements Controller{
     }
 
     @FXML
-    void eventExit(ActionEvent event) {
+    void eventExit(ActionEvent event) throws Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("你确定要退出系统吗?");
         alert.showAndWait();
         if (alert.getResult().equals(ButtonType.OK)) {
+            GlobalConfig.save();
             Stage stage = (Stage) apMain.getScene().getWindow();
             stage.close();
             Platform.exit();
@@ -74,11 +72,12 @@ public class Main implements Controller{
     }
 
     @FXML
-    void eventChangeUser(ActionEvent event) {
+    void eventChangeUser(ActionEvent event) throws Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("你确定要退出登录吗?");
         alert.showAndWait();
         if (alert.getResult().equals(ButtonType.OK)) {
+            GlobalConfig.save();
             Stage stage = (Stage) apMain.getScene().getWindow();
             Login formLogin = new Login();
             formLogin.load();
@@ -91,7 +90,6 @@ public class Main implements Controller{
         double userInfoLayoutX;
 
         lblStat.setText("你好，尊敬的" +
-                User.valueOfRole(currentUser.getRole()) +
                 currentUser.getRealName() + "，祝您拥有愉快的一天。");
         lblStat.autosize();
         userInfoLayoutX = (pnStat.getWidth() - lblStat.getWidth()) / 2;
@@ -105,12 +103,12 @@ public class Main implements Controller{
 
         lblUser.setLayoutX(userInfoLayoutX);
 
-        this.switchToUserConfig();
+        switchToUserManage(null);
     }
 
-    public void load(User currentUser) {
-        this.currentUser = currentUser;
-        this.load();
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 
     @FXML
@@ -121,10 +119,6 @@ public class Main implements Controller{
 
     @FXML
     void switchToUserConfig(MouseEvent event) {
-        switchToUserConfig();
-    }
-
-    void switchToUserConfig(){
         FXMLLoader loader =null;
         try {
             loader = new FXMLLoader(GlobalConfig.getViewUrl(
@@ -140,7 +134,7 @@ public class Main implements Controller{
 
     @FXML
     void switchToUserManage(ActionEvent event) {
-        FXMLLoader loader =null;
+        FXMLLoader loader = null;
         try {
             loader = new FXMLLoader(GlobalConfig.getViewUrl(
                     "userManage.fxml"));

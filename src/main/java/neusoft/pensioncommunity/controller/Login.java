@@ -17,11 +17,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
+import neusoft.pensioncommunity.dao.UserDao;
 import neusoft.pensioncommunity.model.User;
-import neusoft.pensioncommunity.utils.GlobalConfig;
+import neusoft.pensioncommunity.GlobalConfig;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class Login implements Controller {
 
@@ -66,36 +69,47 @@ public class Login implements Controller {
     }
 
     @FXML
-    void eventLogin(ActionEvent event) throws Exception {
-        if (Objects.equals(txtName.getText(), "") || Objects.equals(txtPass.getText(), "")) {
+    void eventLogin(ActionEvent event){
+
+        if (Objects.equals(txtName.getText(), "") ||
+                Objects.equals(txtPass.getText(), "")) {
             lblStat.setText("请输入用户名或密码");
-        } else {
-
-            FXMLLoader loader = new FXMLLoader(
-                    GlobalConfig.getViewUrl("main.fxml"));
-
-
-            Stage stageMain = new Stage();
-            Scene sceneMain = new Scene(loader.load());
-            Stage stageLogin = (Stage) apLogin.getScene().getWindow();
-
-            stageMain.setScene(sceneMain);
-            stageMain.initStyle(StageStyle.TRANSPARENT);
-            stageMain.setTitle(GlobalConfig.TITLE_MAIN);
-            stageMain.toFront();
-            stageMain.show();
-
-            Main ctrlMain = loader.getController();
-            ctrlMain.load(new User(1,
-                    "123",
-                    "黄旭达",
-                    "123",
-                    "",
-                    1
-            ));
-
-            stageLogin.close();
+            txtName.requestFocus();
+            return;
         }
+
+        User currentUser = GlobalConfig.userService.verifyUser(
+                txtName.getText(),txtPass.getText());
+        if (currentUser == null){
+            lblStat.setText("用户名或密码输入错误");
+            txtName.requestFocus();
+            return;
+        }
+
+        GlobalConfig.currentUser = currentUser;
+
+        Stage stageLogin = (Stage) apLogin.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(
+                GlobalConfig.getViewUrl("main.fxml"));
+
+        Stage stageMain = new Stage();
+        Scene sceneMain = null;
+        try {
+            sceneMain = new Scene(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stageMain.setScene(sceneMain);
+        stageMain.initStyle(StageStyle.TRANSPARENT);
+        stageMain.setTitle(GlobalConfig.TITLE_MAIN);
+        stageMain.toFront();
+        stageMain.show();
+
+        Main ctrlMain = loader.getController();
+        ctrlMain.load();
+
+        stageLogin.close();
     }
 
     @FXML
@@ -149,7 +163,6 @@ public class Login implements Controller {
         lblStat.setText("");
     }
 
-    @Override
     public void load() {
         Scene sceneLogin = null;
         try {
@@ -172,4 +185,8 @@ public class Login implements Controller {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }

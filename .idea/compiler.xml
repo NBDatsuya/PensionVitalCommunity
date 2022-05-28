@@ -7,11 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PensionCommunity" />
+        <module name="PensionVitalCommunity" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="PensionCommunity" target="17" />
+      <module name="PensionVitalCommunity" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>

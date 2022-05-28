@@ -1,7 +1,7 @@
 package neusoft.pensioncommunity.model;
 
 public abstract class Model {
-    public int getID() {
+    public int getId() {
         return 0;
     }
 }
