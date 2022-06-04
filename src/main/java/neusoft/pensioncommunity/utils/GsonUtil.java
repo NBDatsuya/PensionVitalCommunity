@@ -9,8 +9,10 @@ import lombok.Getter;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
 public class GsonUtil {
@@ -22,7 +24,7 @@ public class GsonUtil {
 
                     @Override
                     public void write(JsonWriter out, LocalDate value) throws IOException {
-                        out.jsonValue(value.toString());
+                        out.jsonValue("\""+value.toString()+"\"");
                     }
 
                     @Override
@@ -31,19 +33,31 @@ public class GsonUtil {
                     }
                 })
 
-                .registerTypeAdapter(LocalTime.class, new TypeAdapter<LocalDate>() {
+                .registerTypeAdapter(LocalTime.class, new TypeAdapter<LocalTime>() {
 
                     @Override
-                    public void write(JsonWriter out, LocalDate value) throws IOException {
-
+                    public void write(JsonWriter out, LocalTime value) throws IOException {
+                        out.jsonValue("\""+ value.toString()+"\"");
                     }
 
                     @Override
-                    public LocalDate read(JsonReader in) throws IOException {
-                        return null;
+                    public LocalTime read(JsonReader in) throws IOException {
+                        return LocalTime.parse(in.nextString(),DateTimeFormatter.ofPattern("HH:mm"));
                     }
                 })
 
+                .registerTypeAdapter(LocalDateTime.class, new TypeAdapter<LocalDateTime>() {
+
+                    @Override
+                    public void write(JsonWriter out, LocalDateTime value) throws IOException {
+                        out.jsonValue("\""+value.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))+"\"");
+                    }
+
+                    @Override
+                    public LocalDateTime read(JsonReader in) throws IOException {
+                        return LocalDateTime.parse(in.nextString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                    }
+                })
                 .create();
     }
 

@@ -3,7 +3,6 @@ package neusoft.pensioncommunity.dao;
 import javafx.collections.ObservableList;
 import neusoft.pensioncommunity.model.Model;
 
-import java.util.List;
 
 public interface Dao<T extends Model> {
 
@@ -12,7 +11,8 @@ public interface Dao<T extends Model> {
     public T search(int id);
     public void modify(int id,T item);
     public ObservableList<T> getAll();
-    public void load();
-    public void save() throws Exception;
+    public void load() throws Exception;
+    public void save();
     public int size();
+    public int getNewId();
 }

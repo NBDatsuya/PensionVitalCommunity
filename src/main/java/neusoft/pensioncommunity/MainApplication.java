@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import neusoft.pensioncommunity.dao.UserDao;
-import neusoft.pensioncommunity.utils.FileUtil;
 
 public class MainApplication extends Application {
 
@@ -25,5 +23,7 @@ public class MainApplication extends Application {
         stage.setTitle(GlobalConfig.TITLE_LOGIN);
         stage.centerOnScreen();
         stage.show();
+
+        GlobalConfig.loadConfig();
     }
 }

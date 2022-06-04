@@ -11,7 +11,7 @@
 .tab-pane > .tab-header-area > .headers-region > .tab {
   -fx-background-color: white;
   -fx-background-insets: 0 0 1px 0;     
-  -fx-padding: 1.5em 1em;
+  -fx-padding: 1.2em 1em;
 }
 
 .tab-pane > .tab-header-area > .headers-region > .tab >.tab-container >.tab-label {
@@ -41,7 +41,7 @@
 }
 .table-view .column-header-background .label{
   -fx-text-fill: #720087;
-  -fx-size:30;
+  -fx-size:25;
 }
 .table-view .corner {
   -fx-background-color: transparent;

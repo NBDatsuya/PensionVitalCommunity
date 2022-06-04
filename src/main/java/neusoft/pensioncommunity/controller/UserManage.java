@@ -10,16 +10,23 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 
 
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import lombok.Getter;
+import lombok.Setter;
 import neusoft.pensioncommunity.GlobalConfig;
 import neusoft.pensioncommunity.dao.UserDao;
+import neusoft.pensioncommunity.model.Senior;
 import neusoft.pensioncommunity.model.User;
 import neusoft.pensioncommunity.service.UserService;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -94,7 +101,7 @@ public class UserManage implements Controller {
     private TextField modelUTel;
 
     @FXML
-    private Tab tabList;
+    private AnchorPane apService;
 
     @FXML
     private Tab tabModel;
@@ -118,38 +125,41 @@ public class UserManage implements Controller {
     private ObservableList<User> listView;
     private User userModel = new User();
 
+    @Setter
+    @Getter
+    private Main mainController;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colID.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
+        colID.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getId()).asObject());
 
-        colName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
-        colRealName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRealName()));
-        colRole.setCellValueFactory(cellData -> new SimpleStringProperty(
-                    User.valueOfRole(cellData.getValue().getRole()
+        colName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getName()));
+        colRealName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getRealName()));
+        colRole.setCellValueFactory(c -> new SimpleStringProperty(
+                    GlobalConfig.valueOfRole(c.getValue().getRole()
                 )));
-        colTel.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTel()));
-        colBirth.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getBirthDay()));
-        colGender.setCellValueFactory(cellData -> new SimpleStringProperty(
-                    User.valueOfGender(cellData.getValue().getGender()
+        colTel.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getTel()));
+        colBirth.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getBirthDay()));
+        colGender.setCellValueFactory(c -> new SimpleStringProperty(
+                    GlobalConfig.valueOfGender(c.getValue().getGender()
                 )));
 
-        refreshList();
+
         tblUser.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        cbxBy.setItems(GlobalConfig.USERMANAGE_BYS);
+        cbxBy.getItems().setAll(GlobalConfig.SELECTION_USERFIELDS);
+        cbxBy.getSelectionModel().select(0);
         cbxKey.getSelectionModel().select(0);
-        modelURole.getItems().setAll(GlobalConfig.USERMANAGE_ROLE);
-        modelUGender.getItems().setAll(GlobalConfig.USERMANAGE_GENDER);
-        clearModel();
+        modelURole.getItems().setAll(GlobalConfig.SELECTION_ROLE);
+        modelUGender.getItems().setAll(GlobalConfig.SELECTION_GENDER);
+    }
 
+    @Override
+    public void requestLoadData() {
+        refreshList();
     }
 
     private void clearModel() {
-        lblCaution.setOpacity(0);
-        modelUName.requestFocus();
         userModel = new User();
-
-        userModel.setId(service.size());
+        userModel.setId(service.getNewId());
         userModel.setBirthDay(LocalDate.now());
 
         modelUID.setText(String.valueOf(userModel.getId()));
@@ -159,31 +169,30 @@ public class UserManage implements Controller {
         modelUPassword.setText("");
         modelUBirth.setValue(userModel.getBirthDay());
 
-        SingleSelectionModel<String> ssm = modelURole.getSelectionModel();
-        ssm.select(0);
-        ssm = modelUGender.getSelectionModel();
-        ssm.select(0);
-    }
-    private void loadModel(){
+        modelURole.getSelectionModel().select(0);
+        modelUGender.getSelectionModel().select(0);
+
         lblCaution.setOpacity(0);
         modelUName.requestFocus();
 
-        modelUID.textProperty().bindBidirectional(new SimpleStringProperty(String.valueOf(userModel.getId())));
-        modelUName.textProperty().bindBidirectional(new SimpleStringProperty(userModel.getName()));
-        modelUTel.textProperty().bindBidirectional(new SimpleStringProperty(userModel.getTel()));
-        modelURealName.textProperty().bindBidirectional(new SimpleStringProperty(userModel.getRealName()));
-        modelUPassword.textProperty().bindBidirectional(new SimpleStringProperty(userModel.getPassword()));
-        modelUBirth.valueProperty().bindBidirectional(new SimpleObjectProperty<>(userModel.getBirthDay()));
+    }
+    private void loadModel(){
+        modelUID.setText(String.valueOf(userModel.getId()));
+        modelUName.setText(userModel.getName());
+        modelUTel.setText(userModel.getTel());
+        modelURealName.setText(userModel.getRealName());
+        modelUPassword.setText(userModel.getPassword());
+        modelUBirth.setValue(userModel.getBirthDay());
 
-        SingleSelectionModel<String> ssm = modelURole.getSelectionModel();
-        ssm.select(userModel.getRole()-1);
+        modelURole.getSelectionModel().select(userModel.getRole()-1);
+        modelUGender.getSelectionModel().select(userModel.getGender());
 
-        ssm = modelUGender.getSelectionModel();
-        ssm.select(userModel.getGender());
+        lblCaution.setOpacity(0);
+        modelUName.requestFocus();
     }
 
     private void refreshList(){
-        listView = service.searchByRole(0,false);
+        listView = service.searchNotByRole(0);
         tblUser.setItems(listView);
         tblUser.refresh();
         tblUser.autosize();
@@ -191,12 +200,48 @@ public class UserManage implements Controller {
     private void refreshList(int field){
         switch (field){
             case 0:
-                listView.clear();
-                listView.addAll(service.searchById(Integer.parseInt(cbxKey.getValue())));
+                for(User item : tblUser.getItems())
+                    if (item.getId()==Integer.parseInt(cbxKey.getValue())){
+                        tblUser.getSelectionModel().select(item);
+                        break;
+                    }
+                break;
+            case 1:
+                listView.setAll(service.searchByName(cbxKey.getValue()));
+                break;
+            case 2:
+                listView.setAll(service.searchByRealName(cbxKey.getValue()));
+                break;
+            case 3:
+                listView.setAll(service.searchByRole(
+                        1+cbxKey.getSelectionModel().
+                                getSelectedIndex()));
+                break;
+            case 4:
+                listView.setAll(service.searchByGender(
+                        cbxKey.getSelectionModel().
+                                getSelectedIndex()));
+                break;
+            case 5:
+                listView.setAll(service.searchByTel(cbxKey.getValue()));
+                break;
+            case 6:
+                listView.setAll(service.searchByBirthday(
+                        LocalDate.parse(cbxKey.getValue())));
+                break;
         }
-        tblUser.setItems(listView);
-        tblUser.refresh();
-        tblUser.autosize();
+
+
+        if(field==0) return;
+
+        if(listView.contains(null)){ //??可以改进
+            tblUser.getItems().clear();
+        }else{
+            tblUser.setItems(listView);
+            tblUser.refresh();
+            tblUser.autosize();
+        }
+        mainController.requestMessage("共找到"+listView.size()+"条数据");
     }
 
     public void eventNew(ActionEvent event){
@@ -212,10 +257,15 @@ public class UserManage implements Controller {
         alert.showAndWait();
         if (alert.getResult().equals(ButtonType.OK)){
             for(User item:selItem){
-                service.remove(item.getId());
+                if(!service.remove(item.getId())){
+                    alert.setAlertType(Alert.AlertType.WARNING);
+                    alert.setHeaderText("无法删除用户("+item.getId()+")"+item.getRealName()+"，因为该用户关联了多条长者住户的数据！");
+                    alert.show();
+                }
             }
         }
         enableEditTab(false,0);
+
     }
     public void eventCancel(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -223,22 +273,25 @@ public class UserManage implements Controller {
         alert.showAndWait();
         if (alert.getResult().equals(ButtonType.OK))
             enableEditTab(false,0);
+        else
+            modelUName.requestFocus();
 
     }
     public void eventSave(ActionEvent event){
-        userModel.setBirthDay(modelUBirth.getValue());
-        userModel.setGender(modelUGender.getItems().indexOf(modelUGender.getValue()));
-        userModel.setName(modelUName.getText());
-
-        userModel.setPassword(modelUPassword.getText());
-        userModel.setRealName(modelURealName.getText());
-        userModel.setRole(1+modelURole.getItems().indexOf(modelURole.getValue()));
-        userModel.setTel(modelUTel.getText());
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("请问是否保存？");
         alert.showAndWait();
         if (alert.getResult().equals(ButtonType.OK)){
+
+            userModel.setBirthDay(modelUBirth.getValue());
+            userModel.setGender(modelUGender.getItems().indexOf(modelUGender.getValue()));
+            userModel.setName(modelUName.getText());
+
+            userModel.setPassword(modelUPassword.getText());
+            userModel.setRealName(modelURealName.getText());
+            userModel.setRole(1+modelURole.getItems().indexOf(modelURole.getValue()));
+            userModel.setTel(modelUTel.getText());
+
             switch (modelFunction){
                 case 1:
                     service.add(userModel);
@@ -252,19 +305,76 @@ public class UserManage implements Controller {
             modelUName.requestFocus();
     }
     public void eventSearch(ActionEvent event){
-        if(cbxKey.getValue()==null || cbxKey.getValue().equals("")){
+        if(cbxKey.getValue()==null || cbxKey.getValue().equals(""))
             refreshList();
-        }else
+        else
             refreshList(cbxBy.getSelectionModel().getSelectedIndex());
     }
+    public void eventViewService(ActionEvent event){
+        FXMLLoader loader = null;
+        try {
+            loader = new FXMLLoader(GlobalConfig.getViewUrl(
+                    "serviceViewAssistant.fxml"));
+
+            apService.getChildren().setAll((Node) loader.load());
+
+            ServiceViewAssistant sva = loader.getController();
+            sva.setModelUser(userModel);
+            sva.setParentController(this);
+            sva.requestLoadData();
+
+            apService.setVisible(true);
+            apService.setFocusTraversable(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML void eventSelectItem(MouseEvent event){
+        ObservableList<User> selItem = tblUser.getSelectionModel().getSelectedItems();
+        boolean isEmpty = selItem.isEmpty();
+        if(selItem.size()==1){
+            userModel = tblUser.getSelectionModel().getSelectedItem();
+            if (event.getClickCount()==2 &&
+                    event.getButton().equals(MouseButton.PRIMARY))
+                enableEditTab(true,2);
+        }
+        itemSelected(!isEmpty,
+                selItem.size() > 1);
+    }
+    public void requestCloseView(){
+        apService.setVisible(false);
+        apService.setFocusTraversable(false);
+    }
+
+    public void actBy(ActionEvent event){
+        switch (cbxBy.getSelectionModel().getSelectedIndex()){
+            case 3:
+                cbxKey.setEditable(false);
+                cbxKey.getItems().setAll(GlobalConfig.SELECTION_ROLE);
+                cbxKey.getSelectionModel().select(0);
+                break;
+            case 4:
+                cbxKey.setEditable(false);
+                cbxKey.getItems().setAll(GlobalConfig.SELECTION_GENDER);
+                cbxKey.getSelectionModel().select(0);
+                break;
+            default:
+                cbxKey.setEditable(true);
+                cbxKey.getItems().clear();
+                cbxKey.setValue("");
+        }
+
+        cbxKey.requestFocus();
+    }
+
     public void enableEditTab(boolean bool, int modelFunction){
         btnNew.setDisable(bool);
-        btnModify.setDisable(bool);
-        btnDel.setDisable(bool);
+        btnModify.setDisable((bool ^
+                tblUser.getSelectionModel().getSelectedItems().isEmpty()) ||
+                modelFunction>0);
+        btnDel.setDisable(btnModify.isDisable());
         btnView.setDisable(bool);
-        SingleSelectionModel<Tab> ssm = tabPane.getSelectionModel();
-        ssm.select(bool?1:0);
-        tabModel.setText("");
+        tabPane.getSelectionModel().select(bool?1:0);
         tabModel.setDisable(!bool);
         this.modelFunction = modelFunction;
         tblUser.setDisable(bool);
@@ -277,6 +387,8 @@ public class UserManage implements Controller {
                 tabModel.setText("修改用户");
                 loadModel();
                 break;
+            case 0:
+                tabModel.setText("");
         }
 
         if(!bool){
@@ -284,41 +396,11 @@ public class UserManage implements Controller {
         }
     }
 
-    public void eventSelectItem(MouseEvent event){
-        ObservableList<User> selItem = tblUser.getSelectionModel().getSelectedItems();
-        if(selItem.size()==1){
-            userModel = tblUser.getSelectionModel().getSelectedItem();
-            if (event.getClickCount()==2 &&
-                    event.getButton().equals(MouseButton.PRIMARY))
-                enableEditTab(true,2);
-        }
-        itemSelected(selItem.size() != 0,
-                selItem.size() > 1);
-    }
     public void itemSelected(boolean selected,boolean multisel){
-        btnModify.setDisable(multisel||(!selected));
-        btnView.setDisable(btnModify.isDisable());
-        btnDel.setDisable(!selected);
+        btnModify.setDisable((!selected)||(modelFunction!=0) ||(multisel));
+        btnView.setDisable((multisel) || tblUser.getSelectionModel().getSelectedItem().getRole()!=1);
+        btnDel.setDisable((!selected) || (modelFunction!=0));
     }
 
-    public void actBy(ActionEvent event){
-        switch (cbxBy.getSelectionModel().getSelectedIndex()){
-            case 3:
-                cbxKey.setEditable(false);
-                cbxKey.setItems(GlobalConfig.USERMANAGE_ROLE);
-                cbxKey.getSelectionModel().select(0);
-                break;
-            case 4:
-                cbxKey.setEditable(false);
-                cbxKey.setItems(GlobalConfig.USERMANAGE_GENDER);
-                cbxKey.getSelectionModel().select(0);
-                break;
-            default:
-                cbxKey.setEditable(true);
-                cbxKey.setItems(null);
-                cbxKey.setValue("");
-        }
 
-        cbxKey.requestFocus();
-    }
 }

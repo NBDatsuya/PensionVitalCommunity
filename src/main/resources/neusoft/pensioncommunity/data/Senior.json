@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "赵铁柱",
+    "gender": 0,
+    "identity": "210300195101010000",
+    "birthDay": "1951-01-01",
+    "telSelf": "100000000000",
+    "telRelative": "100000000000",
+    "assistantId": 1,
+    "status": 1
+  },
+  {
+    "id": 2,
+    "name": "张根硕",
+    "gender": 0,
+    "identity": "210600195501010000",
+    "birthDay": "1955-01-01",
+    "telSelf": "100000000000",
+    "telRelative": "100000000000",
+    "assistantId": 1,
+    "status": 1
+  },
+  {
+    "id": 3,
+    "name": "王大宝",
+    "gender": 0,
+    "identity": "210600194501010000",
+    "birthDay": "1945-01-01",
+    "telSelf": "100000000000",
+    "telRelative": "100000000000",
+    "assistantId": -1,
+    "status": 0
+  }
+]

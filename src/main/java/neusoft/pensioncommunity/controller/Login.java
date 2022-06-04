@@ -105,9 +105,8 @@ public class Login implements Controller {
         stageMain.setTitle(GlobalConfig.TITLE_MAIN);
         stageMain.toFront();
         stageMain.show();
-
         Main ctrlMain = loader.getController();
-        ctrlMain.load();
+        ctrlMain.requestLoadData();
 
         stageLogin.close();
     }
@@ -187,6 +186,11 @@ public class Login implements Controller {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    @Override
+    public void requestLoadData() {
 
     }
 }

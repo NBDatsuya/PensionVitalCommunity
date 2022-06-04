@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="524.0" prefWidth="744.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="neusoft.pensioncommunity.controller.ReserveBus">
+   <children>
+      <AnchorPane fx:id="apService" layoutX="10.0" layoutY="10.0" prefHeight="524.0" prefWidth="744.0" style="-fx-background-color: #B892C8;" stylesheets="@css/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="14.0" layoutY="14.0" minHeight="0.0" minWidth="0.0" prefHeight="117.0" prefWidth="718.0" style="-fx-background-color: #E9CFEC;">
+               <children>
+                  <VBox layoutX="569.0" layoutY="15.0" prefHeight="78.0" prefWidth="134.0" spacing="20.0">
+                     <children>
+                        <JFXButton fx:id="btnBack" onAction="#eventBack" prefHeight="34.0" prefWidth="132.0" style="-fx-background-color: #9E7BFF;" text="返      回" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnExport" prefHeight="34.0" prefWidth="134.0" style="-fx-background-color: #9E7BFF;" text="导出数据" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+                  <GridPane alignment="TOP_CENTER" layoutX="12.0" layoutY="6.0" prefHeight="103.0" prefWidth="547.0">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.799951171875" minWidth="10.0" prefWidth="62.79999389648438" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="0.0" prefWidth="126.40002441406249" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="64.60004882812501" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="77.39995117187499" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="99.5999755859375" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="111.60002441406243" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="86.8000244140625" minHeight="10.0" prefHeight="19.400004196166993" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="75.99998779296875" minHeight="10.0" prefHeight="23.600006103515625" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="76.39998168945314" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="111.6000015258789" minHeight="10.0" prefHeight="25.5999755859375" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="118.40001220703127" minHeight="10.0" prefHeight="21.600024414062503" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="98.0" text="班车编号" textAlignment="CENTER" textFill="#590176">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBID" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="149.0" text="Bus.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="102.0" text="线路代码" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="98.0" text="线路名称" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="21.0" prefWidth="154.0" text="运营周期" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="120.0" text="发车时间&#10;" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="106.0" text="方向" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="143.0" text="运营时段" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="120.0" text="预约截止时间" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="4" GridPane.rowSpan="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="120.0" text="备注&#10;" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBMemo" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="80.0" text="备注&#10;" textAlignment="CENTER" textFill="#590176" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBCode" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Bus.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBName" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Bus.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBDirection" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Bus.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBAnnual" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="120.0" prefWidth="158.0" text="Bus.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBTimeBegin" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Bus.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBHours" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Bus.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBDeadline" alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="114.0" text="Bus.ID" textAlignment="CENTER" textFill="#dc0000" GridPane.columnIndex="5" GridPane.rowSpan="2">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="120.0" text="当前乘客数" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelBCountPassenger" alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="114.0" text="Bus.ID" textAlignment="CENTER" textFill="#dc0000" GridPane.columnIndex="5" GridPane.rowIndex="2" GridPane.rowSpan="3">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+            <TabPane fx:id="tabpane" layoutX="14.0" layoutY="134.0" prefHeight="374.0" prefWidth="718.0" rotateGraphic="true" stylesheets="@css/style.css" tabClosingPolicy="ALL_TABS">
+               <tabs>
+                  <Tab fx:id="tabReserve" closable="false" text="班车预约">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="298.0" prefWidth="718.0" style="-fx-background-color: #E9CFEC;">
+                           <children>
+                              <Pane layoutX="14.0" layoutY="3.0" prefHeight="42.0" prefWidth="487.0" style="-fx-background-color: #7A5DC7;">
+                                 <children>
+                                    <JFXButton fx:id="btnSearch" layoutX="422.0" layoutY="8.0" onAction="#eventSearch" style="-fx-background-color: #9E7BFF;" text="查  询" textFill="WHITE">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <ComboBox fx:id="cbxBy" layoutX="85.0" layoutY="10.0" onAction="#actBy" prefHeight="23.0" prefWidth="104.0" />
+                                    <Label layoutX="14.0" layoutY="13.0" text="查询方式：" textFill="WHITE">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="201.0" layoutY="12.0" text="关键字：" textFill="WHITE">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbxKey" editable="true" layoutX="253.0" layoutY="11.0" prefHeight="23.0" prefWidth="156.0" />
+                                 </children>
+                              </Pane>
+                              <TableView fx:id="tblSenior" editable="true" layoutX="13.0" layoutY="47.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#eventSelectItemToReserve" prefHeight="272.0" prefWidth="698.0">
+                                 <columns>
+                                    <TableColumn fx:id="colID" prefWidth="52.800018310546875" text="编号">
+                                       <cellValueFactory>
+                                          <PropertyValueFactory property="ID" />
+                                       </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="colName" prefWidth="79.99996948242188" text="姓名" />
+                                    <TableColumn fx:id="colGender" prefWidth="62.39996337890625" text="性别" />
+                                    <TableColumn fx:id="colIdentify" prefWidth="145.60003662109375" text="身份证号" />
+                                    <TableColumn fx:id="colTelSelf" prefWidth="97.5999755859375" text="联系方式" />
+                                    <TableColumn fx:id="colAssistantID" prefWidth="99.99993896484375" text="生活管家编号" />
+                                    <TableColumn fx:id="colAssistantName" prefWidth="99.99993896484375" text="生活管家姓名" />
+                                 </columns>
+                              </TableView>
+                              <JFXButton fx:id="btnReserve" disable="true" layoutX="544.0" layoutY="4.0" onAction="#eventReserve" prefHeight="38.0" prefWidth="134.0" style="-fx-background-color: #9E7BFF;" text="预   约" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabCheck" closable="false" text="预约确认">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #E9CFEC;">
+                           <children>
+                              <Pane layoutX="14.0" layoutY="3.0" prefHeight="42.0" prefWidth="487.0" style="-fx-background-color: #7A5DC7;">
+                                 <children>
+                                    <JFXButton fx:id="btnSearch1" layoutX="422.0" layoutY="8.0" onAction="#eventSearch" style="-fx-background-color: #9E7BFF;" text="查  询" textFill="WHITE">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <ComboBox fx:id="cbxBy1" layoutX="85.0" layoutY="10.0" onAction="#actBy" prefHeight="23.0" prefWidth="104.0" />
+                                    <Label layoutX="14.0" layoutY="13.0" text="查询方式：" textFill="WHITE">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="201.0" layoutY="12.0" text="关键字：" textFill="WHITE">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="cbxKey1" editable="true" layoutX="253.0" layoutY="11.0" prefHeight="23.0" prefWidth="156.0" />
+                                 </children>
+                              </Pane>
+                              <JFXButton fx:id="btnConfirm" disable="true" layoutX="515.0" layoutY="5.0" onAction="#eventConfirm" prefHeight="38.0" prefWidth="83.0" style="-fx-background-color: #9E7BFF;" text="确认" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="btnCancel" disable="true" layoutX="620.0" layoutY="5.0" onAction="#eventCancel" prefHeight="38.0" prefWidth="83.0" style="-fx-background-color: #9E7BFF;" text="取消" textFill="WHITE">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </JFXButton>
+                              <TableView fx:id="tblSenior1" editable="true" layoutX="13.0" layoutY="47.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#eventSelectItemToCheck" prefHeight="272.0" prefWidth="698.0">
+                                 <columns>
+                                    <TableColumn fx:id="colID1" prefWidth="52.800018310546875" text="编号">
+                                       <cellValueFactory>
+                                          <PropertyValueFactory property="ID" />
+                                       </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn fx:id="colName1" prefWidth="79.99996948242188" text="姓名" />
+                                    <TableColumn fx:id="colGender1" prefWidth="62.39996337890625" text="性别" />
+                                    <TableColumn fx:id="colIdentify1" prefWidth="145.60003662109375" text="身份证号" />
+                                    <TableColumn fx:id="colTelSelf1" prefWidth="97.5999755859375" text="联系方式" />
+                                    <TableColumn fx:id="colAssistantName1" prefWidth="99.99993896484375" text="生活管家姓名" />
+                                    <TableColumn fx:id="colReserveTime" prefWidth="127.20001220703125" text="预约时间" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

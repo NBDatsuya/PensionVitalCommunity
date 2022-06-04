@@ -1,7 +1,10 @@
 package neusoft.pensioncommunity.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public abstract class Model {
-    public int getId() {
-        return 0;
-    }
+    @Getter
+    @Setter
+    protected int id;
 }

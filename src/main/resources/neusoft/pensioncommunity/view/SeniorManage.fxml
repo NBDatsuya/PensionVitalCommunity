@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="apModule" prefHeight="524.0" prefWidth="744.0" style="-fx-background-color: #B892C8;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="neusoft.pensioncommunity.controller.SeniorManage">
+   <children>
+      <TabPane fx:id="tabPane" layoutX="25.0" layoutY="20.0" prefHeight="490.0" prefWidth="702.0" tabClosingPolicy="ALL_TABS">
+        <tabs>
+          <Tab fx:id="tabList" closable="false" text="长者信息表">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #E9CFEC;">
+                     <children>
+                        <Pane layoutX="33.0" layoutY="7.0" prefHeight="42.0" prefWidth="636.0" style="-fx-background-color: #7A5DC7;">
+                           <children>
+                              <JFXButton fx:id="btnSearch" layoutX="577.0" layoutY="7.0" onAction="#eventSearch" style="-fx-background-color: #9E7BFF;" text="查  询" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <ComboBox fx:id="cbxBy" layoutX="236.0" layoutY="11.0" onAction="#actBy" prefHeight="23.0" prefWidth="134.0" />
+                              <Label layoutX="160.0" layoutY="13.0" text="查询方式：" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="378.0" layoutY="13.0" text="关键字：" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="60.0" layoutY="9.0" text="查询" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="cbxKey" editable="true" layoutX="438.0" layoutY="10.0" onAction="#eventSearch" onKeyTyped="#eventSearch" prefHeight="23.0" prefWidth="126.0" />
+                           </children>
+                        </Pane>
+                        <ComboBox fx:id="cbxStatus" layoutX="526.0" layoutY="62.0" onAction="#actStatus" prefHeight="23.0" prefWidth="128.0" />
+                        <Label fx:id="lblStatusTip" layoutX="448.0" layoutY="64.0" text="长者状态：" textFill="#ff00aa">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tblSenior" editable="true" layoutX="9.0" layoutY="92.0" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#eventSelectItem" prefHeight="342.0" prefWidth="685.0">
+                           <columns>
+                              <TableColumn fx:id="colID" prefWidth="41.600006103515625" text="编号">
+                                 <cellValueFactory>
+                                    <PropertyValueFactory property="ID" />
+                                 </cellValueFactory>
+                              </TableColumn>
+                              <TableColumn fx:id="colName" prefWidth="71.99993896484375" text="姓名" />
+                              <TableColumn fx:id="colGender" prefWidth="34.4000244140625" text="性别" />
+                              <TableColumn fx:id="colIdentify" prefWidth="148.79998779296875" text="身份证号" />
+                              <TableColumn fx:id="colAge" prefWidth="34.39996337890625" text="年龄" />
+                              <TableColumn fx:id="colBirthDay" prefWidth="90.39996337890625" text="出生日期" />
+                              <TableColumn fx:id="colAssistant" prefWidth="61.5999755859375" text="管理员" />
+                              <TableColumn fx:id="colTel" prefWidth="211.2000732421875" text="联系方式">
+                                 <columns>
+                                    <TableColumn fx:id="colTelSelf" prefWidth="93.5999755859375" text="本人" />
+                                    <TableColumn fx:id="colTelRelative" minWidth="1.5999755859375" prefWidth="104.800048828125" text="亲属" />
+                                 </columns>
+                              </TableColumn>
+                           </columns>
+                        </TableView>
+                        <JFXButton fx:id="btnAdd" layoutX="46.0" layoutY="59.0" onAction="#eventAdd" style="-fx-background-color: #9E7BFF;" text="长者入住" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnModify" disable="true" layoutX="140.0" layoutY="59.0" onAction="#eventModify" style="-fx-background-color: #9E7BFF;" text="修改信息" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnChangeStatus" disable="true" layoutX="236.0" layoutY="59.0" onAction="#eventChangeStatus" style="-fx-background-color: #9E7BFF;" text="状态变更" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabModel" closable="false" disable="true">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #E9CFEC;">
+                     <children>
+                        <GridPane alignment="TOP_CENTER" layoutX="53.0" layoutY="52.0" prefHeight="246.0" prefWidth="596.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.799951171875" minWidth="10.0" prefWidth="95.40001220703124" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="186.39996337890625" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="160.5999816894531" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="154.20001831054685" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="86.8000244140625" minHeight="10.0" prefHeight="55.40001220703125" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="103.99999999999999" minHeight="10.0" prefHeight="67.19999389648439" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="93.6" minHeight="10.0" prefHeight="55.19998168945311" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="85.60000610351562" minHeight="10.0" prefHeight="78.40001831054687" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="85.60000610351562" minHeight="10.0" prefHeight="52.79998168945312" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="98.0" text="编号" textAlignment="CENTER" textFill="#590176">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="modelSID" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Senior.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="102.0" text="姓名" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="98.0" text="性别" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="101.0" text="身份证号" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="280.0" text="出生日期" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="219.0" text="本人联系方式" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="310.0" text="家属联系方式" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="modelSName" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="modelSIdentify" prefHeight="30.0" prefWidth="162.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="modelSGender" editable="false" prefHeight="29.0" prefWidth="186.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="modelSBirthday" editable="false" prefHeight="30.0" prefWidth="230.0" GridPane.columnIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="modelSTelSelf" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="262.0" text="已选择生活管家：" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="modelSTelRelative" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <Label fx:id="lblCaution" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="605.0" text="请输入格式正确的18位身份证号" textAlignment="CENTER" textFill="#bf001d" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="262.0" text="输入生活管家编号：" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="modelSAssistant" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <Label fx:id="modelURealName" contentDisplay="CENTER" prefHeight="42.0" prefWidth="170.0" text="User.RealName" textFill="#590176" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <JFXButton fx:id="btnOK" contentDisplay="CENTER" layoutX="191.0" layoutY="338.0" onAction="#eventSave" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: #9E7BFF;" text="保存" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnCancel" layoutX="403.0" layoutY="338.0" onAction="#eventCancel" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #9E7BFF;" text="取消" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabChangeStatus" closable="false" disable="true">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #E9CFEC;">
+                     <children>
+                        <JFXButton fx:id="btnOK1" contentDisplay="CENTER" layoutX="191.0" layoutY="338.0" onAction="#eventSaveChange" prefHeight="34.0" prefWidth="106.0" style="-fx-background-color: #9E7BFF;" text="保存" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnCancel1" layoutX="403.0" layoutY="338.0" onAction="#eventCancelChange" prefHeight="34.0" prefWidth="107.0" style="-fx-background-color: #9E7BFF;" text="取消" textFill="WHITE">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <GridPane alignment="TOP_CENTER" layoutX="53.0" layoutY="32.0" prefHeight="121.0" prefWidth="596.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.799951171875" minWidth="10.0" prefWidth="95.40001220703124" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="184.00003662109373" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="123.59996337890624" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.4000366210937" minWidth="10.0" prefWidth="190.39997558593745" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="86.8000244140625" minHeight="10.0" prefHeight="41.399993896484375" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="103.99999999999999" minHeight="10.0" prefHeight="44.79998779296874" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="93.6" minHeight="10.0" prefHeight="42.999975585937506" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="119.6" minHeight="10.0" prefHeight="46.20002441406251" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="98.0" text="编号" textAlignment="CENTER" textFill="#590176">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="modelSID1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Senior.ID" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="102.0" text="姓名" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="98.0" text="性别" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="101.0" text="身份证号" textAlignment="CENTER" textFill="#590176" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="280.0" text="出生日期" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="219.0" text="本人联系方式" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="125.0" text="家属联系方式" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="modelSName1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Senior.Name" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="modelSGender1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Senior.Gender" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="modelSIdentify1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Senior.Identify" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="modelSBirthday1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Senior.Birthday" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="modelSTelSelf1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Senior.TelSelf" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="modelSTelRelative1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Senior.TelRelative" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="280.0" text="年龄" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="modelSAge1" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="203.0" text="Senior.getAge()" textAlignment="CENTER" textFill="#590176" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="224.0" layoutY="196.0" prefHeight="20.0" prefWidth="98.0" text="当前状态：" textAlignment="CENTER" textFill="#590176">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="224.0" layoutY="267.0" prefHeight="31.0" prefWidth="98.0" text="变更为：" textAlignment="CENTER" textFill="#590176">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cbxToStatus" layoutX="353.0" layoutY="265.0" onAction="#actStatus" prefHeight="34.0" prefWidth="144.0" />
+                        <Label fx:id="modelSStatus" layoutX="356.0" layoutY="196.0" prefHeight="20.0" prefWidth="98.0" text="Senior.Status" textFill="#590176">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="219.0" layoutY="228.0" prefHeight="20.0" prefWidth="98.0" text="生活管家：" textAlignment="CENTER" textFill="#590176">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="modelURealName1" contentDisplay="CENTER" layoutX="351.0" layoutY="228.0" prefHeight="20.0" prefWidth="132.0" text="User.RealName" textAlignment="CENTER" textFill="#590176">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

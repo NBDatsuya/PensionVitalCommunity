@@ -1,73 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="apModule" prefHeight="524.0" prefWidth="744.0" style="-fx-background-color: #B892C8;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="neusoft.pensioncommunity.controller.UserConfig">
-    <children>
-        <ImageView fx:id="imgUAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="157.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@pic/test_avatar.jpg" />
-            </image>
-        </ImageView>
-        <GridPane alignment="TOP_CENTER" layoutX="355.0" layoutY="134.0" prefHeight="222.0" prefWidth="250.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.20001220703125" minWidth="10.0" prefWidth="88.00001220703125" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.60003662109375" minWidth="10.0" prefWidth="113.59998779296878" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints maxHeight="50.599981689453124" minHeight="10.0" prefHeight="18.800003051757812" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="99.4" minHeight="10.0" prefHeight="25.3999755859375" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="91.40001373291017" minHeight="0.0" prefHeight="21.800001525878905" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="154.80000762939454" minHeight="10.0" prefHeight="76.9999984741211" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <Label text="用户名" textFill="WHITE">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Label>
-                <Label text="真实姓名" textFill="WHITE" GridPane.rowIndex="1">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Label>
-                <Label text="用户权限" textFill="WHITE" GridPane.rowIndex="2">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Label>
-                <Label fx:id="lblUName" text="User.name" textFill="WHITE" GridPane.columnIndex="1">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <Label fx:id="lblURName" text="User.realName" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <Label fx:id="lblURole" text="User.role" textFill="#6d00fc" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <Label text="可使用功能" textFill="WHITE" GridPane.rowIndex="3">
-                    <font>
-                        <Font size="15.0" />
-                    </font>
-                </Label>
-                <ListView fx:id="lstUAccess" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B892C8;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            </children>
-        </GridPane>
-        <JFXButton layoutX="189.0" layoutY="319.0" style="-fx-background-color: #893BFF;" text="修改密码" textFill="WHITE" />
-    </children>
+<AnchorPane fx:id="apModule" prefHeight="524.0" prefWidth="744.0" style="-fx-background-color: #B892C8;" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="neusoft.pensioncommunity.controller.UserConfig">
+   <children>
+      <ImageView fx:id="imgAvatar" fitHeight="154.0" fitWidth="132.0" layoutX="145.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pic/test_avatar.jpg" />
+         </image>
+      </ImageView>
+      <GridPane alignment="TOP_CENTER" layoutX="289.0" layoutY="113.0" prefHeight="226.0" prefWidth="319.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.800048828125" minWidth="10.0" prefWidth="94.4000244140625" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.19998779296873" minWidth="10.0" prefWidth="143.99997558593748" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="50.599981689453124" minHeight="10.0" prefHeight="32.8" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="99.4" minHeight="10.0" prefHeight="31.200000000000003" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="91.40001373291017" minHeight="10.0" prefHeight="30.599977874755865" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="91.40001373291017" minHeight="10.0" prefHeight="30.599977874755865" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="91.40001373291017" minHeight="10.0" prefHeight="30.599977874755865" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="91.40001373291017" minHeight="0.0" prefHeight="30.599977874755865" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="130.0" text="用户名" textFill="#590176">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="205.0" text="真实姓名" textFill="#590176" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="122.0" text="用户权限" textFill="#590176" GridPane.rowIndex="5">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="modelURole" alignment="CENTER" prefHeight="22.0" prefWidth="228.0" text="User.role" textFill="#fffb7a" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="modelUName" prefHeight="29.0" prefWidth="142.0" GridPane.columnIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
+            <TextField fx:id="modelURealName" prefHeight="29.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="186.0" text="联系方式" textFill="#590176" GridPane.rowIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="modelUTel" prefHeight="29.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="194.0" text="性别" textFill="#590176" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="modelUGender" prefHeight="28.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label alignment="CENTER" prefHeight="20.0" prefWidth="235.0" text="出生日期" textFill="#590176" GridPane.rowIndex="4">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="modelUBirthday" prefHeight="30.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+      <JFXButton fx:id="btnChangePwd" layoutX="169.0" layoutY="288.0" onAction="#eventChangePwd" style="-fx-background-color: #9E7BFF;" text="修改密码" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnSave" layoutX="257.0" layoutY="391.0" onAction="#eventSave" style="-fx-background-color: #9E7BFF;" text="保   存" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnReset" layoutX="414.0" layoutY="391.0" onAction="#eventReset" style="-fx-background-color: #9E7BFF;" text="重    置" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXButton>
+      <Pane fx:id="apPwd" layoutX="138.0" layoutY="48.0" prefHeight="411.0" prefWidth="498.0" style="-fx-background-color: #7A5DC7;" visible="false">
+         <children>
+            <Label layoutX="213.0" layoutY="14.0" text="密码修改" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnSavePwd" layoutX="120.0" layoutY="339.0" onAction="#eventSavePwd" style="-fx-background-color: #9E7BFF;" text="保   存" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnCancel" layoutX="306.0" layoutY="338.0" onAction="#eventCancel" style="-fx-background-color: #9E7BFF;" text="取    消" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXButton>
+            <VBox layoutX="124.0" layoutY="86.0" prefHeight="193.0" prefWidth="251.0" spacing="30.0">
+               <children>
+                  <JFXPasswordField fx:id="txtOldPwd" focusColor="WHITE" labelFloat="true" promptText="请输入旧密码" unFocusColor="#631b5d">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXPasswordField>
+                  <JFXPasswordField fx:id="txtNewPwd" focusColor="WHITE" labelFloat="true" promptText="请输入新密码" unFocusColor="#631b5d">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXPasswordField>
+                  <JFXPasswordField fx:id="txtNewConfirm" focusColor="WHITE" labelFloat="true" promptText="请确认新密码" unFocusColor="#631b5d">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXPasswordField>
+               </children>
+            </VBox>
+            <Label fx:id="lblStat" alignment="CENTER" layoutX="124.0" layoutY="291.0" prefHeight="24.0" prefWidth="251.0" textAlignment="RIGHT" textFill="#ffee00">
+               <font>
+                  <Font name="DengXian Regular" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </Pane>
+      <Label fx:id="lblCaution" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="252.0" layoutY="339.0" prefHeight="42.0" prefWidth="240.0" text="密码必须为8个字符及以上&#10;且为字母、数字和特殊符号的组合" textAlignment="CENTER" textFill="#bf001d" visible="false" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

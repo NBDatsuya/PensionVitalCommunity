@@ -1,8 +1,8 @@
 [
       {
             "id": 0,
-            "name": "123",
-            "password": "123",
+            "name": "1",
+            "password": "1",
             "role": 0,
             "realName": "admin",
             "gender":0,
@@ -22,7 +22,7 @@
             "name": "chichi",
             "password": "chichi",
             "role": 2,
-            "realName": "张赤澈",
+            "realName": "张车赤",
             "gender":1,
             "tel": "1145141919810",
             "birthDay": "2002-05-20"
