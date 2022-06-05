@@ -5,9 +5,6 @@ import javafx.collections.ObservableList;
 import lombok.Getter;
 import neusoft.pensioncommunity.dao.SeniorDao;
 import neusoft.pensioncommunity.model.Senior;
-import neusoft.pensioncommunity.model.User;
-
-import java.util.List;
 
 public class SeniorService implements Service<Senior>{
     @Getter
@@ -100,7 +97,7 @@ public class SeniorService implements Service<Senior>{
         return list;
     }
 
-    public ObservableList<Senior> searchByIN(String in) {
+    public ObservableList<Senior> searchByIdentity(String in) {
         ObservableList<Senior> list = FXCollections.observableArrayList();
         for (Senior item : serviceList)
             if (item.getIdentity().trim().contains(in))
@@ -111,7 +108,7 @@ public class SeniorService implements Service<Senior>{
     public ObservableList<Senior> searchByTelSelf(String tel) {
         ObservableList<Senior> list = FXCollections.observableArrayList();
         for (Senior item : serviceList){
-            if (item.getIdentity().trim().contains(tel))
+            if (item.getTelSelf().trim().contains(tel))
                 list.add(item);
         }
         return list;
@@ -120,7 +117,7 @@ public class SeniorService implements Service<Senior>{
     public ObservableList<Senior> searchByTelRelative(String tel) {
         ObservableList<Senior> list = FXCollections.observableArrayList();
         for (Senior item : serviceList){
-            if (item.getIdentity().contains(tel))
+            if (item.getTelRelative().contains(tel))
                 list.add(item);
         }
         return list;
@@ -138,4 +135,12 @@ public class SeniorService implements Service<Senior>{
         return dao.getNewId();
     }
 
+    public boolean verifyIdentify(String identify, Senior model){
+        ObservableList<Senior> list = FXCollections.observableArrayList();
+        for (Senior item : dao.getAll()){
+            if (item.getIdentity().equals(identify) && item.getId()!=model.getId())
+                list.add(item);
+        }
+        return list.size()==0;
+    }
 }

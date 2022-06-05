@@ -172,7 +172,6 @@ public class UserManage implements Controller {
         modelURole.getSelectionModel().select(0);
         modelUGender.getSelectionModel().select(0);
 
-        lblCaution.setOpacity(0);
         modelUName.requestFocus();
 
     }
@@ -187,7 +186,6 @@ public class UserManage implements Controller {
         modelURole.getSelectionModel().select(userModel.getRole()-1);
         modelUGender.getSelectionModel().select(userModel.getGender());
 
-        lblCaution.setOpacity(0);
         modelUName.requestFocus();
     }
 
@@ -200,6 +198,7 @@ public class UserManage implements Controller {
     private void refreshList(int field){
         switch (field){
             case 0:
+                tblUser.getSelectionModel().clearSelection();
                 for(User item : tblUser.getItems())
                     if (item.getId()==Integer.parseInt(cbxKey.getValue())){
                         tblUser.getSelectionModel().select(item);
@@ -244,13 +243,13 @@ public class UserManage implements Controller {
         mainController.requestMessage("共找到"+listView.size()+"条数据");
     }
 
-    public void eventNew(ActionEvent event){
+    @FXML void eventNew(ActionEvent event){
         enableEditTab(true,1);
     }
-    public void eventModify(ActionEvent event){
+    @FXML void eventModify(ActionEvent event){
         enableEditTab(true,2);
     }
-    public void eventDelete(ActionEvent event){
+    @FXML void eventDelete(ActionEvent event){
         ObservableList<User> selItem = tblUser.getSelectionModel().getSelectedItems();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("确定要删除这"+selItem.size()+"条数据吗？");
@@ -267,7 +266,7 @@ public class UserManage implements Controller {
         enableEditTab(false,0);
 
     }
-    public void eventCancel(ActionEvent event){
+    @FXML void eventCancel(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("你确定要取消吗?");
         alert.showAndWait();
@@ -277,7 +276,10 @@ public class UserManage implements Controller {
             modelUName.requestFocus();
 
     }
-    public void eventSave(ActionEvent event){
+    @FXML void eventSave(ActionEvent event){
+
+        if(!verifyUser()) return;
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("请问是否保存？");
         alert.showAndWait();
@@ -301,16 +303,17 @@ public class UserManage implements Controller {
                     break;
             }
             enableEditTab(false,0);
-        }else
+        }
+        else
             modelUName.requestFocus();
     }
-    public void eventSearch(ActionEvent event){
+    @FXML void eventSearch(ActionEvent event){
         if(cbxKey.getValue()==null || cbxKey.getValue().equals(""))
             refreshList();
         else
             refreshList(cbxBy.getSelectionModel().getSelectedIndex());
     }
-    public void eventViewService(ActionEvent event){
+    @FXML void eventViewService(ActionEvent event){
         FXMLLoader loader = null;
         try {
             loader = new FXMLLoader(GlobalConfig.getViewUrl(
@@ -346,7 +349,7 @@ public class UserManage implements Controller {
         apService.setFocusTraversable(false);
     }
 
-    public void actBy(ActionEvent event){
+    @FXML void actBy(ActionEvent event){
         switch (cbxBy.getSelectionModel().getSelectedIndex()){
             case 3:
                 cbxKey.setEditable(false);
@@ -402,5 +405,38 @@ public class UserManage implements Controller {
         btnDel.setDisable((!selected) || (modelFunction!=0));
     }
 
-
+    public boolean verifyUser(){
+        if(modelUName.getText().isEmpty()){
+            lblCaution.setVisible(true);
+            lblCaution.setText("登录名不能为空");
+            modelUName.requestFocus();
+            return false;
+        }
+        if(modelURealName.getText().isEmpty()){
+            lblCaution.setVisible(true);
+            lblCaution.setText("真实姓名不能为空");
+            modelURealName.requestFocus();
+            return false;
+        }
+        if(modelUPassword.getText().isEmpty()){
+            lblCaution.setVisible(true);
+            lblCaution.setText("密码不能为空");
+            modelUPassword.requestFocus();
+            return false;
+        }
+        if(!service.verifyName(modelUName.getText(),modelFunction==1?null:userModel)){
+            lblCaution.setVisible(true);
+            lblCaution.setText("用户名已经存在");
+            modelUName.requestFocus();
+            return false;
+        }
+        if(!service.verifyPassword(modelUPassword.getText())){
+            lblCaution.setVisible(true);
+            lblCaution.setText("密码必须不少于8位");
+            modelUPassword.requestFocus();
+            return false;
+        }
+        lblCaution.setVisible(false);
+        return true;
+    }
 }

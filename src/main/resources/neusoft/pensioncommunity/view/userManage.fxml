@@ -140,7 +140,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="lblCaution" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="599.0" text="密码必须为8个字符及以上&#10;且为字母、数字和特殊符号的组合" textAlignment="CENTER" textFill="#bf001d" GridPane.columnSpan="4" GridPane.rowIndex="4">
+                              <Label fx:id="lblCaution" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="599.0" text="密码必须为8个字符及以上&#10;且为字母、数字和特殊符号的组合" textAlignment="CENTER" textFill="#bf001d" visible="false" GridPane.columnSpan="4" GridPane.rowIndex="4">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

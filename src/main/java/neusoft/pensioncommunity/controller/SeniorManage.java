@@ -79,12 +79,11 @@ public class SeniorManage implements Controller{
             (c.getValue().getStatus()==0)?
                 ("无") :
             GlobalConfig.userService.searchById(
-                c.getValue().getAssistantId()).getRealName()
-                        )
+                c.getValue().getAssistantId()).getRealName())
         );
 
         modelSAssistant.focusedProperty().addListener((ov, oldV, newV) -> {
-            modelURealName.setOpacity(1);
+            modelURealName.setVisible(true);
             if (!newV) { // 失去焦点
                 if(modelSAssistant.getText().isEmpty()){
                     modelURealName.setText("您可以在添加住户后\n再设置管家");
@@ -114,12 +113,12 @@ public class SeniorManage implements Controller{
         modelSIdentify.focusedProperty().addListener((ov, oldV, newV) -> {
             if (!newV) { // 身份证号位数错误，身份证对应用户已存在
                 if(modelSIdentify.getText().length()!=18){
-                    lblCaution.setOpacity(1);
+                    lblCaution.setVisible(true);
                     btnOK.setDisable(true);
                 }
                 else{
                     if(!identifyToValue()) return;
-                    lblCaution.setOpacity(0);
+                    lblCaution.setVisible(false);
                     btnOK.setDisable(false);
                 }
             }
@@ -144,7 +143,7 @@ public class SeniorManage implements Controller{
         try{
             tempBirthday = LocalDate.parse(strBirthday);
         }catch (DateTimeParseException e){
-            lblCaution.setOpacity(1);
+            lblCaution.setVisible(true);
             lblCaution.setText("身份证输入有误");
             modelSIdentify.requestFocus();
             return false;
@@ -209,8 +208,9 @@ public class SeniorManage implements Controller{
     }
 
     private void clearModel() {
-        lblCaution.setOpacity(0);
-        modelURealName.setOpacity(1);
+        lblCaution.setVisible(false);
+        modelURealName.setVisible(true);
+        modelURealName.setText("可以在添加住户后\n再手动设置管家");
         seniorModel = new Senior();
         seniorModel.setId(service.size()+1);
         seniorModel.setBirthDay(LocalDate.now());
@@ -288,8 +288,8 @@ public class SeniorManage implements Controller{
     }
 
     private void loadModelToEdit() {
-        lblCaution.setOpacity(0);
-        modelURealName.setOpacity(1);
+        lblCaution.setVisible(false);
+        modelURealName.setVisible(true);
         modelSID.setText(String.valueOf(seniorModel.getId()));
         modelSName.setText(seniorModel.getName());
         modelSIdentify.setText((seniorModel.getIdentity()));
@@ -531,6 +531,9 @@ public class SeniorManage implements Controller{
     }
 
     @FXML void eventSave(ActionEvent event) {
+
+        if(!verifySenior()) return;
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("请问是否保存？");
         alert.showAndWait();
@@ -556,6 +559,22 @@ public class SeniorManage implements Controller{
             enableTab(false,0);
         }else
             modelSName.requestFocus();
+    }
+
+    private boolean verifySenior() {
+        if(modelSName.getText().isEmpty()){
+            lblCaution.setVisible(true);
+            lblCaution.setText("长者姓名不能为空");
+            modelSName.requestFocus();
+            return false;
+        }
+        if(!service.verifyIdentify(modelSIdentify.getText(),seniorModel)){
+            lblCaution.setVisible(true);
+            lblCaution.setText("已存在相同身份证号的长者");
+            modelSIdentify.requestFocus();
+            return false;
+        }
+        return true;
     }
 
     @FXML void eventSearch(ActionEvent event) {
@@ -599,7 +618,7 @@ public class SeniorManage implements Controller{
             case 5: //By Identification Number
                 listView.clear();
                 listView.addAll(
-                        service.searchByIN(
+                        service.searchByIdentity(
                                 cbxKey.getValue()));
                 break;
             case 6: //By Assistant ID

@@ -150,4 +150,19 @@ public class UserService implements Service<User>{
         return dao.size();
     }
 
+    public boolean verifyName(String name,User model){
+        if(name.isEmpty()) return false;
+
+        ObservableList<User> list = FXCollections.observableArrayList();
+        for(User item : dao.getAll()){
+            if((item.getName().equals(name)))
+                if(model==null || model.getId()!=item.getId())
+                    list.add(item);
+        }
+        return list.size()==0;
+    }
+
+    public boolean verifyPassword(String pwd){
+        return pwd.length()>=8;
+    }
 }

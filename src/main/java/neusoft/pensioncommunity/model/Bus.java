@@ -1,12 +1,19 @@
 package neusoft.pensioncommunity.model;
 
+import javafx.util.converter.LocalDateTimeStringConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import neusoft.pensioncommunity.GlobalConfig;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.WeekFields;
+import java.util.Calendar;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -17,7 +24,17 @@ public class Bus extends Model{
     private String code;
     private String name;
     private int direction;
-    private String annual;
+    /**
+     * 0 = 每天
+     * 1 = 每周一
+     * 2 = 每周二
+     * 3 = 每周三
+     * 4 = 每周四
+     * 5 = 每周五
+     * 6 = 每周六
+     * 7 = 每周日
+     */
+    private int annual;
 
     /**
      * 0 = 全天
@@ -39,5 +56,15 @@ public class Bus extends Model{
     }
     public boolean isDDLSet(){
         return (timeDeadline!=null);
+    }
+
+    public boolean isReservable(){
+        LocalDateTime nextDeadline = LocalDateTime.from(LocalDate.now().atTime(timeDeadline));
+        int now = LocalDateTime.now().getDayOfWeek().getValue();
+
+        if(now == annual || annual==0)
+            return nextDeadline.isAfter(LocalDateTime.now());
+        else
+            return false;
     }
 }

@@ -117,14 +117,23 @@ public class UserConfig implements Controller{
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("请问是否保存？");
         alert.showAndWait();
-        if (alert.getResult().equals(ButtonType.OK)){
+        if (alert.getResult().equals(ButtonType.OK)) {
             currentUser.setBirthDay(modelUBirthday.getValue());
             currentUser.setGender(modelUGender.getItems().indexOf(modelUGender.getValue()));
             currentUser.setName(modelUName.getText());
             currentUser.setRealName(modelURealName.getText());
             currentUser.setTel(modelUTel.getText());
-            GlobalConfig.userService.modify(currentUser.getId(),currentUser);
+            GlobalConfig.userService.modify(currentUser.getId(), currentUser);
             mainController.requestLoadData();
+            switch (currentUser.getRole()){
+                case 1:
+                    mainController.switchToSeniorManage();
+                    break;
+                case 2:
+                    mainController.switchToBusManage();
+                    break;
+            }
+            mainController.requestMessage("用户信息修改成功");
             requestLoadData();
         }else
             modelUName.requestFocus();

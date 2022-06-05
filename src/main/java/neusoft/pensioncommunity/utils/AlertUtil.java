@@ -1,6 +1,7 @@
 package neusoft.pensioncommunity.utils;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import lombok.Setter;
 
 public class AlertUtil {
@@ -10,11 +11,11 @@ public class AlertUtil {
     @Setter
     private Alert.AlertType alertType;
 
-    public void show(String headerText, Alert.AlertType alertType){
-
+    public ButtonType showToConfirm(String headerText){
+        return null;
     }
 
-    public void alert(String headerText, Alert.AlertType alertType){
+    public void alertWarning(String headerText){}
+    public void alertError(String headerText){}
 
-    }
 }

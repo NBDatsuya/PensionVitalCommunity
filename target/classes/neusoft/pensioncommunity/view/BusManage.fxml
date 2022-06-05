@@ -172,7 +172,7 @@
                                  </font>
                               </TextField>
                               <ComboBox fx:id="modelBDirection" prefHeight="33.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <ComboBox fx:id="modelBAnnual" editable="true" prefHeight="34.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <ComboBox fx:id="modelBAnnual" prefHeight="34.0" prefWidth="195.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <TextField fx:id="modelBBegin" promptText="格式：09:00" GridPane.columnIndex="3">
                                  <font>
                                     <Font size="15.0" />

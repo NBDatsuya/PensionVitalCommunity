@@ -35,6 +35,10 @@ public class GlobalConfig {
             FXCollections.observableArrayList("ID","姓名","性别","年龄>=","年龄<=","身份证号",
                     "管家编号","本人联系方式","家属联系方式");
 
+    public static final List<String> SELECTION_RESERVEFIELDS =
+            FXCollections.observableArrayList("ID","姓名","性别","身份证号","联系方式",
+                    "管家编号","管家姓名");
+
     public static final List<String> SELECTION_BUSFIELDS =
             FXCollections.observableArrayList("ID","代码","名称","方向","运营周期","运营时段",
                     "截止时间","发车时间","备注");
@@ -48,9 +52,9 @@ public class GlobalConfig {
 
     public static final List<String> SELECTION_ANNUAL =
             FXCollections.observableArrayList(
-                    "每天","隔天","每周日","每周一",
+                    "每天","每周一",
                     "每周二","每周三","每周四","每周五",
-                    "每周六");
+                    "每周六","每周日");
     public static final List<String> SELECTION_HOURS =
             FXCollections.observableArrayList("全天","早上","下午","晚上");
 
@@ -149,6 +153,18 @@ public class GlobalConfig {
             case 3:
             default:
                 return "晚上";
+        }
+    }
+    public static String valueOfAnnual(int annual){
+        switch (annual){
+            case 0: return "每天";
+            case 1: return "每周一";
+            case 2: return "每周二";
+            case 3: return "每周三";
+            case 4: return "每周四";
+            case 5: return "每周五";
+            case 6: return "每周六";
+            case 7: default:return "每周日";
         }
     }
 

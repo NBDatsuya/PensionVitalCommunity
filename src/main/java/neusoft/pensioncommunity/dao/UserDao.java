@@ -17,11 +17,20 @@ public class UserDao extends AbstractDao<User> {
 
     @Override
     public void load() {
-        String buffer = FileUtil.readFile("User.json");
-        this.daoList.addAll(GsonUtil.getGson().fromJson(
-                    buffer,User[].class
-                )
-        );
+        try{
+            String buffer = FileUtil.readFile("User.json");
+            this.daoList.addAll(GsonUtil.getGson().fromJson(
+                            buffer,User[].class
+                    )
+            );
+        }catch (Exception e){
+            FileUtil.writeFile("user.json","[{\"name\":\"1\",\"password\":\"1\",\"role\":0,\"realName\":\"admin\",\"gender\":0,\"tel\":\"1145141919810\",\"birthDay\":\"2022-05-20\",\"id\":0}]");
+            String buffer = FileUtil.readFile("User.json");
+            this.daoList.addAll(GsonUtil.getGson().fromJson(
+                            buffer,User[].class
+                    )
+            );
+        }
     }
 
     @Override

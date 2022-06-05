@@ -190,7 +190,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </TextField>
-                              <Label fx:id="lblCaution" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="605.0" text="请输入格式正确的18位身份证号" textAlignment="CENTER" textFill="#bf001d" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                              <Label fx:id="lblCaution" alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="605.0" text="请输入格式正确的18位身份证号" textAlignment="CENTER" textFill="#bf001d" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="4">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

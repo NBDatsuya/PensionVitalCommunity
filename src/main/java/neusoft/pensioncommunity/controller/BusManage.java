@@ -13,10 +13,11 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import lombok.Getter;
 import lombok.Setter;
 import neusoft.pensioncommunity.GlobalConfig;
 import neusoft.pensioncommunity.model.Bus;
+import neusoft.pensioncommunity.model.Senior;
+import neusoft.pensioncommunity.model.User;
 import neusoft.pensioncommunity.service.BusService;
 
 import java.io.IOException;
@@ -51,7 +52,7 @@ public class BusManage implements Controller{
         colDir.setCellValueFactory(c -> new SimpleStringProperty(
                 GlobalConfig.valueOfDirection(c.getValue().getDirection()
                 )));
-        colAnnual.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getAnnual()));
+        colAnnual.setCellValueFactory(c -> new SimpleStringProperty(GlobalConfig.valueOfAnnual(c.getValue().getAnnual())));
         colHours.setCellValueFactory(c -> new SimpleStringProperty(
                 GlobalConfig.valueOfHours(c.getValue().getHours())));
         colBegin.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getTimeBegin()));
@@ -73,7 +74,7 @@ public class BusManage implements Controller{
                 lblCaution.setText("");
                 if(modelBBegin.getText().isEmpty()){
                     lblCaution.setText("出发时间不能为空");
-                    lblCaution.setOpacity(1);
+                    lblCaution.setVisible(true);
                     modelBBegin.requestFocus();
                     return;
                 }
@@ -95,7 +96,7 @@ public class BusManage implements Controller{
                 }
                 catch(Exception e){
                     lblCaution.setText("出发时间格式错误");
-                    lblCaution.setOpacity(1);
+                    lblCaution.setVisible(true);
                     modelBBegin.requestFocus();
                 }
 
@@ -110,21 +111,15 @@ public class BusManage implements Controller{
                 if(modelBDeadline.getText().isEmpty()){
                     tempTimeDeadline = null;
                     lblCaution.setText("可以在添加班次后\n手动添加截止时间");
-                    lblCaution.setOpacity(1);
+                    lblCaution.setVisible(true);
                 }
                 try{
                     if(modelBDeadline.getText().isEmpty()) return;
                     tempTimeDeadline = LocalTime.parse(modelBDeadline.getText());
-                    if (tempTimeBegin!=null &&
-                                    tempTimeBegin.isBefore(tempTimeDeadline)){
-                        lblCaution.setText("截止时间不能早于出发时间");
-                        lblCaution.setOpacity(1);
-                        modelBDeadline.requestFocus();
-                    }
                 }
                 catch(Exception e){
                     lblCaution.setText("截止时间格式错误");
-                    lblCaution.setOpacity(1);
+                    lblCaution.setVisible(true);
                     modelBDeadline.requestFocus();
                 }
             }
@@ -150,13 +145,14 @@ public class BusManage implements Controller{
 
         modelBDirection.getSelectionModel().select(0);
         modelBAnnual.getSelectionModel().select(0);
-        modelBAnnual.setValue("");
         modelBHours.getSelectionModel().select(0);
 
-        lblCaution.setOpacity(0);
+        lblCaution.setVisible(false);
         modelBCode.requestFocus();
     }
     private void loadModel(){
+        busModel.isReservable();
+
         modelBID.setText(String.valueOf(busModel.getId()));
         modelBCode.setText(busModel.getCode());
         modelBName.setText(busModel.getName());
@@ -165,13 +161,13 @@ public class BusManage implements Controller{
         modelBDeadline.setText(busModel.isDDLSet()?busModel.getTimeDeadline().toString():"");
 
         modelBDirection.getSelectionModel().select(busModel.getDirection());
-        modelBAnnual.setValue(busModel.getAnnual());
+        modelBAnnual.getSelectionModel().select(busModel.getAnnual());
         modelBHours.getSelectionModel().select(busModel.getHours());
 
         tempTimeBegin = busModel.getTimeBegin();
         tempTimeDeadline = busModel.isDDLSet()?busModel.getTimeDeadline():null;
 
-        lblCaution.setOpacity(0);
+        lblCaution.setVisible(false);
         modelBCode.requestFocus();
     }
 
@@ -180,6 +176,43 @@ public class BusManage implements Controller{
         tblBus.setItems(listView);
         tblBus.refresh();
         tblBus.autosize();
+    }
+    private void refreshList(int field) {
+        if(cbxKey.getValue().isEmpty()) {refreshList();return;}
+        switch (field){
+            case 0:
+                tblBus.getSelectionModel().clearSelection();
+                for(Bus item : tblBus.getItems())
+                    if (item.getId()==Integer.parseInt(cbxKey.getValue())){
+                        tblBus.getSelectionModel().select(item);
+                        break;
+                    }
+                break;
+            case 1:
+                listView.setAll(service.searchByCode(cbxKey.getValue()));
+                break;
+            case 2:
+                listView.setAll(service.searchByName(cbxKey.getValue()));
+                break;
+            case 3:
+                listView.setAll(service.searchByDirection(cbxKey.getSelectionModel().getSelectedIndex()));
+                break;
+            case 4:
+                listView.setAll(service.searchByAnnual(cbxKey.getSelectionModel().getSelectedIndex()));
+                break;
+            case 5:
+                listView.setAll(service.searchByHours(cbxKey.getSelectionModel().getSelectedIndex()));
+                break;
+            case 6:
+                listView.setAll(service.searchByDeadline(cbxKey.getValue()));
+                break;
+            case 7:
+                listView.setAll(service.searchByBeginTime(cbxKey.getValue()));
+                break;
+            case 8:
+                listView.setAll(service.searchByMemo(cbxKey.getValue()));
+                break;
+        }
     }
 
     /**
@@ -327,7 +360,25 @@ public class BusManage implements Controller{
 
     @FXML
     void actBy(ActionEvent event) {
+        switch (cbxBy.getSelectionModel().getSelectedIndex()){
+            case 3:
+                cbxKey.setEditable(false);
+                cbxKey.getItems().setAll(GlobalConfig.SELECTION_DIRECTION);
+                break;
+            case 4:
+                cbxKey.setEditable(false);
+                cbxKey.getItems().setAll(GlobalConfig.SELECTION_ANNUAL);
+                break;
+            case 5:
+                cbxKey.setEditable(false);
+                cbxKey.getItems().setAll(GlobalConfig.SELECTION_HOURS);
+                break;
+            default:
+                cbxKey.setEditable(true);
+                cbxKey.setValue("");
 
+        }
+        cbxKey.requestFocus();
     }
 
     @FXML
@@ -371,6 +422,7 @@ public class BusManage implements Controller{
 
     @FXML
     void eventReserve(ActionEvent event) {
+
         FXMLLoader loader = null;
         try {
             loader = new FXMLLoader(GlobalConfig.getViewUrl(
@@ -396,19 +448,23 @@ public class BusManage implements Controller{
     }
     @FXML
     void eventSave(ActionEvent event) {
-        busModel.setCode(modelBCode.getText());
-        busModel.setName(modelBName.getText());
-        busModel.setAnnual(modelBAnnual.getValue());
-        busModel.setDirection(modelBDirection.getSelectionModel().getSelectedIndex());
-        busModel.setTimeDeadline(tempTimeDeadline);
-        busModel.setTimeBegin(tempTimeBegin);
-        busModel.setHours(modelBHours.getSelectionModel().getSelectedIndex());
-        busModel.setMemo(modelBMemo.getText());
+
+        if(!verifyBus()) return;
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("请问是否保存？");
         alert.showAndWait();
         if (alert.getResult().equals(ButtonType.OK)){
+
+            busModel.setCode(modelBCode.getText());
+            busModel.setName(modelBName.getText());
+            busModel.setAnnual(modelBAnnual.getSelectionModel().getSelectedIndex());
+            busModel.setDirection(modelBDirection.getSelectionModel().getSelectedIndex());
+            busModel.setTimeDeadline(tempTimeDeadline);
+            busModel.setTimeBegin(tempTimeBegin);
+            busModel.setHours(modelBHours.getSelectionModel().getSelectedIndex());
+            busModel.setMemo(modelBMemo.getText());
+
             switch (modelFunction){
                 case 1:
                     service.add(busModel);
@@ -422,9 +478,29 @@ public class BusManage implements Controller{
             modelBCode.requestFocus();
     }
 
+    private boolean verifyBus() {
+        if(tempTimeBegin.isBefore(tempTimeDeadline)){
+            lblCaution.setVisible(true);
+            lblCaution.setText("发车时间不能早于\n预约截止时间");
+            return false;
+        }
+        if(modelBCode.getText().isEmpty()){
+            lblCaution.setVisible(true);
+            lblCaution.setText("代码不能为空");
+            return false;
+        }
+        if(modelBName.getText().isEmpty()){
+            lblCaution.setVisible(true);
+            lblCaution.setText("路线名称不能为空");
+            return false;
+        }
+        lblCaution.setVisible(false);
+        return true;
+    }
+
     @FXML
     void eventSearch(ActionEvent event) {
-
+        refreshList(cbxBy.getSelectionModel().getSelectedIndex());
     }
 
     @FXML
