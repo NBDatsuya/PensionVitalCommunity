@@ -24,6 +24,7 @@ import neusoft.pensioncommunity.service.Service;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +97,7 @@ public class ReserveBus implements Controller {
         modelBName.setText(modelBus.getName());
         modelBAnnual.setText(GlobalConfig.valueOfAnnual(modelBus.getAnnual()));
         modelBTimeBegin.setText(modelBus.getTimeBegin().toString());
-        modelBDeadline.setText(modelBus.getTimeDeadline().toString());
+        modelBDeadline.setText(modelBus.getTimeDeadline().equals(LocalTime.MIN)?"未设置":modelBus.getTimeDeadline().toString());
         modelBDirection.setText(GlobalConfig.valueOfDirection(modelBus.getDirection()));
         modelBMemo.setText(modelBus.getMemo());
         modelBHours.setText(GlobalConfig.valueOfHours(modelBus.getHours()));
@@ -384,7 +385,7 @@ public class ReserveBus implements Controller {
 
         if(!modelBus.isReservable()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("已经超过本班次的预约时间，不能预约");
+            alert.setHeaderText(modelBus.getTimeDeadline().equals(LocalTime.MIN)?"未设置截止时间":"已经超过本班次的预约时间，不能预约");
             alert.show();
             return;
         }

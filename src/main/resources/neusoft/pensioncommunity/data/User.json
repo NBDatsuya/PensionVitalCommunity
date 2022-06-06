@@ -19,12 +19,12 @@
             "birthDay": "2002-01-05"
       },{
             "id": 2,
-            "name": "chichi",
-            "password": "chichi",
+            "name": "2",
+            "password": "2",
             "role": 2,
-            "realName": "张车赤",
+            "realName": "黄硕硕",
             "gender":1,
             "tel": "1145141919810",
-            "birthDay": "2002-05-20"
+            "birthDay": "2001-07-20"
       }
 ]

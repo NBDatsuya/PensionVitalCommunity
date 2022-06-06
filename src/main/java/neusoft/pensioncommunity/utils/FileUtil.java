@@ -26,6 +26,7 @@ public class FileUtil {
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("读取文件失败！");
+            e.printStackTrace();
             alert.showAndWait();
             System.exit(1);
         }
@@ -39,9 +40,9 @@ public class FileUtil {
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("写文件失败，所作修改将不会被保存！");
+            e.printStackTrace();
             alert.showAndWait();
             System.exit(1);
-            e.printStackTrace();
         }
         return false;
     }

@@ -52,7 +52,7 @@ public class UserDao extends AbstractDao<User> {
                     List<Senior> list1
                             = new ArrayList<>(
                             GlobalConfig.seniorService.searchByAssitant(i + 1));
-
+                    if(list1.size()==0) continue;
                     for (Senior item : list1)
                         item.setAssistantId(i);
 
@@ -65,7 +65,7 @@ public class UserDao extends AbstractDao<User> {
                     List<Reserve> list2
                             = new ArrayList<>(
                             GlobalConfig.reserveSevice.searchByLogistic(i + 1));
-
+                    if(list2.size()==0) continue;
                     for (Reserve item : list2)
                         item.setLogisticId(i);
 

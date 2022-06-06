@@ -176,7 +176,7 @@
                                  </font>
                               </TextField>
                               <JFXComboBox fx:id="modelUGender" focusColor="#c209ff" prefHeight="28.0" prefWidth="237.0" GridPane.columnIndex="3" />
-                              <DatePicker fx:id="modelUBirth" prefHeight="35.0" prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <DatePicker fx:id="modelUBirth" editable="false" prefHeight="35.0" prefWidth="190.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                               <TextField fx:id="modelUTel" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                  <font>
                                     <Font size="15.0" />

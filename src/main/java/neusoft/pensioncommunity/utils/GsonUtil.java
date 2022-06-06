@@ -37,12 +37,13 @@ public class GsonUtil {
 
                     @Override
                     public void write(JsonWriter out, LocalTime value) throws IOException {
-                        out.jsonValue("\""+ value.toString()+"\"");
+                        out.jsonValue("\""+value.toString()+"\"");
                     }
 
                     @Override
                     public LocalTime read(JsonReader in) throws IOException {
-                        return LocalTime.parse(in.nextString(),DateTimeFormatter.ofPattern("HH:mm"));
+                        return LocalTime.parse(in.nextString(),
+                                DateTimeFormatter.ofPattern("HH:mm"));
                     }
                 })
 
@@ -50,12 +51,14 @@ public class GsonUtil {
 
                     @Override
                     public void write(JsonWriter out, LocalDateTime value) throws IOException {
-                        out.jsonValue("\""+value.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))+"\"");
+                        out.jsonValue("\""+
+                                value.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))+"\"");
                     }
 
                     @Override
                     public LocalDateTime read(JsonReader in) throws IOException {
-                        return LocalDateTime.parse(in.nextString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                        return LocalDateTime.parse(in.nextString(),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
                     }
                 })
                 .create();

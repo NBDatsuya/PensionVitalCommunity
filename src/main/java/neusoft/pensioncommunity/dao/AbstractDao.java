@@ -17,7 +17,6 @@ public abstract class AbstractDao<T extends Model> implements Dao<T>{
 
         for(int i = id-1;i<size();i++)
             daoList.get(i).setId(i+1);
-
     }
 
     @Override

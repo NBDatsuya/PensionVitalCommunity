@@ -86,7 +86,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <DatePicker fx:id="modelUBirthday" prefHeight="30.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="modelUBirthday" editable="false" prefHeight="30.0" prefWidth="246.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <JFXButton fx:id="btnChangePwd" layoutX="169.0" layoutY="288.0" onAction="#eventChangePwd" style="-fx-background-color: #9E7BFF;" text="修改密码" textFill="WHITE">

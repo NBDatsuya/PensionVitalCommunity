@@ -59,6 +59,7 @@ public class Bus extends Model{
     }
 
     public boolean isReservable(){
+        if (timeDeadline==null) return false;
         LocalDateTime nextDeadline = LocalDateTime.from(LocalDate.now().atTime(timeDeadline));
         int now = LocalDateTime.now().getDayOfWeek().getValue();
 

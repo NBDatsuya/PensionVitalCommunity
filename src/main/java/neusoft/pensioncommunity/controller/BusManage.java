@@ -56,7 +56,10 @@ public class BusManage implements Controller{
         colHours.setCellValueFactory(c -> new SimpleStringProperty(
                 GlobalConfig.valueOfHours(c.getValue().getHours())));
         colBegin.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getTimeBegin()));
-        colDeadline.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getTimeDeadline()));
+        colDeadline.setCellValueFactory(c -> new SimpleStringProperty(
+                c.getValue().getTimeDeadline().equals(LocalTime.MIN)?
+                "未设置":
+                c.getValue().getTimeDeadline().toString()));
         colCount.setCellValueFactory(c->new SimpleObjectProperty<>(c.getValue().getCountPassenger()));
         colMemo.setCellValueFactory(c->new SimpleStringProperty(c.getValue().getMemo()));
 
@@ -314,7 +317,7 @@ public class BusManage implements Controller{
     private TableColumn<Bus, String> colHours;
 
     @FXML
-    private TableColumn<Bus, LocalTime> colDeadline;
+    private TableColumn<Bus, String> colDeadline;
 
     @FXML
     private Label lblCaution;
@@ -460,7 +463,7 @@ public class BusManage implements Controller{
             busModel.setName(modelBName.getText());
             busModel.setAnnual(modelBAnnual.getSelectionModel().getSelectedIndex());
             busModel.setDirection(modelBDirection.getSelectionModel().getSelectedIndex());
-            busModel.setTimeDeadline(tempTimeDeadline);
+            busModel.setTimeDeadline(tempTimeDeadline==null?LocalTime.MIN:tempTimeDeadline);
             busModel.setTimeBegin(tempTimeBegin);
             busModel.setHours(modelBHours.getSelectionModel().getSelectedIndex());
             busModel.setMemo(modelBMemo.getText());
@@ -479,7 +482,7 @@ public class BusManage implements Controller{
     }
 
     private boolean verifyBus() {
-        if(tempTimeBegin.isBefore(tempTimeDeadline)){
+        if(tempTimeDeadline!=null && tempTimeBegin.isBefore(tempTimeDeadline)){
             lblCaution.setVisible(true);
             lblCaution.setText("发车时间不能早于\n预约截止时间");
             return false;
