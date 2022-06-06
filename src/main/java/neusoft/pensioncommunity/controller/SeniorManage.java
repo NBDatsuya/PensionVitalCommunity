@@ -205,6 +205,7 @@ public class SeniorManage implements Controller{
         tblSenior.setItems(listView);
         tblSenior.refresh();
         tblSenior.autosize();
+        cbxKey.setValue("");
     }
 
     private void clearModel() {
@@ -579,7 +580,9 @@ public class SeniorManage implements Controller{
 
     @FXML void eventSearch(ActionEvent event) {
         if(cbxKey.getValue().isEmpty())
-            refreshListByStatus(cbxStatus.getSelectionModel().getSelectedIndex());
+            refreshListByStatus(currentUser.getRole()==0?
+                    cbxStatus.getSelectionModel().getSelectedIndex():
+                    cbxStatus.getSelectionModel().getSelectedIndex()+1);
         else
             refreshList(cbxBy.getSelectionModel().getSelectedIndex());
     }
@@ -592,7 +595,7 @@ public class SeniorManage implements Controller{
                         tblSenior.getSelectionModel().select(item);
                         return;
                     }
-
+                break;
             case 1: //By Name
                 listView.clear();
                 listView.addAll(service.searchByName(cbxKey.getValue()));

@@ -14,9 +14,10 @@ public class MainApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        GlobalConfig.loadConfig();
+
         FXMLLoader loader = new FXMLLoader(
                 GlobalConfig.getViewUrl("login.fxml"));
-
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -24,6 +25,6 @@ public class MainApplication extends Application {
         stage.centerOnScreen();
         stage.show();
 
-        GlobalConfig.loadConfig();
+
     }
 }

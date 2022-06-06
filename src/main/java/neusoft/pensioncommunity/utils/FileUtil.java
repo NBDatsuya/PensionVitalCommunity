@@ -1,7 +1,9 @@
 package neusoft.pensioncommunity.utils;
 
 import javafx.scene.control.Alert;
+import neusoft.pensioncommunity.model.User;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -21,12 +23,11 @@ public class FileUtil {
         try {
             URL url = FileUtil.class.getResource("/neusoft/pensioncommunity/data/" + fileName);
             return new String(Files.readAllBytes(Paths.get(url.toURI())), Charset.forName("utf-8"));
-        } catch (IOException | URISyntaxException e) {
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("读取文件失败！");
             alert.showAndWait();
             System.exit(1);
-            e.printStackTrace();
         }
         return null;
     }
@@ -35,7 +36,7 @@ public class FileUtil {
             URL url = FileUtil.class.getResource("/neusoft/pensioncommunity/data/" + fileName);
             Files.writeString(Paths.get(url.toURI()), serialized);
             return true;
-        } catch (IOException | URISyntaxException e) {
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("写文件失败，所作修改将不会被保存！");
             alert.showAndWait();

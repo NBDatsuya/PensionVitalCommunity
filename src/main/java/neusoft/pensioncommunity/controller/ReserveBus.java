@@ -80,6 +80,7 @@ public class ReserveBus implements Controller {
         cbxBy.getItems().setAll(GlobalConfig.SELECTION_RESERVEFIELDS);
         cbxBy.setValue("");
         cbxBy1.getItems().setAll(GlobalConfig.SELECTION_RESERVEFIELDS);
+        cbxBy1.getItems().add("预约时间");
         cbxBy1.setValue("");
         tblSenior.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         tblSenior1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

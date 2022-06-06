@@ -170,6 +170,7 @@ public class UserManage implements Controller {
         modelUBirth.setValue(userModel.getBirthDay());
 
         modelURole.getSelectionModel().select(0);
+        modelURole.setDisable(false);
         modelUGender.getSelectionModel().select(0);
 
         modelUName.requestFocus();
@@ -184,6 +185,7 @@ public class UserManage implements Controller {
         modelUBirth.setValue(userModel.getBirthDay());
 
         modelURole.getSelectionModel().select(userModel.getRole()-1);
+        modelURole.setDisable(true);
         modelUGender.getSelectionModel().select(userModel.getGender());
 
         modelUName.requestFocus();
@@ -401,7 +403,9 @@ public class UserManage implements Controller {
 
     public void itemSelected(boolean selected,boolean multisel){
         btnModify.setDisable((!selected)||(modelFunction!=0) ||(multisel));
-        btnView.setDisable((multisel) || tblUser.getSelectionModel().getSelectedItem().getRole()!=1);
+        btnView.setDisable(multisel ||
+                tblUser.getSelectionModel().getSelectedItem()==null ||
+                tblUser.getSelectionModel().getSelectedItem().getRole() != 1);
         btnDel.setDisable((!selected) || (modelFunction!=0));
     }
 

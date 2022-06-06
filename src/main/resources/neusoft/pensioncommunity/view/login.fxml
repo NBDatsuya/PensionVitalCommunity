@@ -69,7 +69,7 @@
                         </Label>
                         <VBox alignment="CENTER" layoutX="34.0" layoutY="268.0" prefHeight="158.0" prefWidth="370.0" spacing="20.0">
                             <children>
-                                <JFXButton fx:id="btnLogin" defaultButton="true" onAction="#eventLogin" prefHeight="42.0" prefWidth="332.0" style="-fx-background-color: F41F6D;" text="登录" textFill="WHITE">
+                                <JFXButton fx:id="btnLogin" defaultButton="true" onAction="#eventLogin" prefHeight="42.0" prefWidth="332.0" style="-fx-background-color: f44a88;" text="登录" textFill="WHITE">
                                     <font>
                                         <Font name="Microsoft YaHei" size="24.0" />
                                     </font>
@@ -90,7 +90,7 @@
                 </Label>
             </children>
         </AnchorPane>
-        <Pane fx:id="pnCaption" layoutY="-5.0" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" prefHeight="36.0" prefWidth="800.0" style="-fx-background-color: #7A23AA;" AnchorPane.bottomAnchor="524.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Pane fx:id="pnCaption" layoutY="-5.0" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" prefHeight="36.0" prefWidth="800.0" style="-fx-background-color: #8645aa;" AnchorPane.bottomAnchor="524.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label fx:id="lblCaption" layoutX="334.0" layoutY="7.0" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" text="东软活力长者社区" textAlignment="RIGHT" textFill="WHITE">
                     <font>
@@ -102,7 +102,7 @@
                 </Label>
                 <JFXButton fx:id="btnClose" alignment="CENTER" focusTraversable="false" layoutX="750.0" onAction="#eventExit" prefHeight="36.0" prefWidth="50.0" ripplerFill="WHITE" style="-fx-background-color: F41F6D;" text="×" textAlignment="CENTER" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="21.0" />
+                        <Font name="DengXian Bold" size="19.0" />
                     </font>
                 </JFXButton>
             </children>

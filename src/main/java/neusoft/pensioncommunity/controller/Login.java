@@ -172,7 +172,6 @@ public class Login implements Controller {
             Stage stage = new Stage();
             stage.setScene(sceneLogin);
             stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setOpacity(0.9);
             stage.setTitle(GlobalConfig.TITLE_LOGIN);
             stage.centerOnScreen();
             stage.toFront();

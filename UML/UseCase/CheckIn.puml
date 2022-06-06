@@ -1,0 +1,56 @@
+@startuml 入住管理
+skinparam DefaultFontName OppoSans M
+skinparam linetype polyline
+skinparam linetype ortho
+left to right direction
+title 入住管理
+
+actor 管理员
+actor 生活管家
+
+usecase 新增入住
+usecase 修改入住
+usecase 查询入住
+
+管理员---->新增入住
+管理员--->修改入住
+管理员-->查询入住
+生活管家-->新增入住
+生活管家-->修改入住
+生活管家-->查看入住
+
+rectangle 新增入住{
+   usecase 选择入住人 as new1
+   usecase 填写其他信息 as new2
+   usecase 保存 as new3
+   new1 .>new2
+   new2 .> new3
+   new3 .>设置服务人员
+}
+
+rectangle 修改入住{
+   usecase 修改入住人 as mod1
+   修改入住 ..> mod1 : include
+   usecase 修改生活管家 as mod2
+   修改入住 .> mod2 : 仅管理员
+ }
+
+ rectangle 查询入住{
+   usecase 选择查询方式
+   usecase 输入关键词
+   usecase 查询
+   查询入住 .> 选择查询方式
+   选择查询方式 --> 输入关键词
+   输入关键词 -->查询
+ }
+
+ rectangle 设置服务人员{
+    usecase 选择服务人员 as set2
+    usecase 选择入住人 as set1
+    set1 .> set2
+
+ }
+ rectangle 查看入住{
+    usecase 查看自己所服务的入住人
+ }
+@enduml

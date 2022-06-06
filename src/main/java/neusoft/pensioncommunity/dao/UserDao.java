@@ -1,12 +1,15 @@
 package neusoft.pensioncommunity.dao;
 
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import lombok.Getter;
 import neusoft.pensioncommunity.GlobalConfig;
 import neusoft.pensioncommunity.model.*;
 import neusoft.pensioncommunity.utils.FileUtil;
 import neusoft.pensioncommunity.utils.GsonUtil;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +27,7 @@ public class UserDao extends AbstractDao<User> {
                     )
             );
         }catch (Exception e){
-            FileUtil.writeFile("user.json","[{\"name\":\"1\",\"password\":\"1\",\"role\":0,\"realName\":\"admin\",\"gender\":0,\"tel\":\"1145141919810\",\"birthDay\":\"2022-05-20\",\"id\":0}]");
-            String buffer = FileUtil.readFile("User.json");
-            this.daoList.addAll(GsonUtil.getGson().fromJson(
-                            buffer,User[].class
-                    )
-            );
+
         }
     }
 

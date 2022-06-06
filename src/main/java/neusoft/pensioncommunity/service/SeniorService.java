@@ -66,6 +66,7 @@ public class SeniorService implements Service<Senior>{
         for (Senior item : dao.getAll())
             if (item.getAssistantId() == id && item.getStatus()==status)
                 list.add(item);
+
         return list;
     }
 

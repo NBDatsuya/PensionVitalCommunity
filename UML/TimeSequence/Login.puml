@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam defaultFontName "OppoSans M"
+skinparam linetype polyline
+skinparam linetype ortho
+title 活力长者管理系统 时序图
+autonumber
+
+actor 用户
+participant LoginController order 1
+participant Login.fxml order 2
+participant UserService order 3
+participant UserDao order 4
+participant Main.fxml order 5
+
+用户 -> LoginController: 进入新系统
+LoginController -> Login.fxml: 初始化视图
+用户->Login.fxml: 点击登录按钮
+Login.fxml->LoginController: 捕获事件
+LoginController -> UserService: 验证身份
+UserService -> UserDao: 获取数据
+UserDao -> UserService: 返回用户数据
+UserService -> LoginController: 验证成功
+LoginController -> Main.fxml: 创建试图
+LoginController -> MainController: 初始化试图
+Main.fxml ->用户: 呈现
+@enduml

@@ -21,7 +21,7 @@
                 <AnchorPane fx:id="apChild" style="-fx-background-color: #B892C8;" BorderPane.alignment="CENTER" />
             </center>
             <left>
-                <Pane prefHeight="571.0" prefWidth="216.0" style="-fx-background-color: #8E44AD;" BorderPane.alignment="CENTER">
+                <Pane prefHeight="571.0" prefWidth="216.0" style="-fx-background-color: #996bad;" BorderPane.alignment="CENTER">
                     <children>
                   <VBox layoutX="10.0" prefHeight="526.0" prefWidth="197.0" spacing="10.0">
                      <children>
@@ -32,12 +32,12 @@
                                               <Image url="@pic/test_avatar.jpg" />
                                           </image>
                                       </ImageView>
-                                      <JFXButton fx:id="btnChangeUser" layoutX="112.0" layoutY="14.0" onAction="#eventChangeUser" style="-fx-background-color: #52D017;" text="切换用户">
+                                      <JFXButton fx:id="btnChangeUser" layoutX="112.0" layoutY="14.0" onAction="#eventChangeUser" style="-fx-background-color: #60db63;" text="切换用户">
                                           <font>
                                               <Font size="14.0" />
                                           </font>
                                       </JFXButton>
-                                      <JFXButton fx:id="btnExit" layoutX="112.0" layoutY="57.0" onAction="#eventExit" style="-fx-background-color: #F62217;" text="退出系统" textFill="WHITE">
+                                      <JFXButton fx:id="btnExit" layoutX="112.0" layoutY="57.0" onAction="#eventExit" style="-fx-background-color: #f63429;" text="退出系统" textFill="WHITE">
                                           <font>
                                               <Font size="14.0" />
                                           </font>
@@ -121,7 +121,7 @@
                 </Pane>
             </left>
             <bottom>
-                <Pane fx:id="pnStat" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" prefHeight="34.0" prefWidth="560.0" style="-fx-background-color: #9370DB;" BorderPane.alignment="CENTER">
+                <Pane fx:id="pnStat" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" prefHeight="34.0" prefWidth="560.0" style="-fx-background-color: #9d7fdb;" BorderPane.alignment="CENTER">
                     <children>
                         <Label fx:id="lblStat" layoutX="269.0" layoutY="9.0" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" text=" " textAlignment="RIGHT" textFill="WHITE">
                             <font>
@@ -135,7 +135,7 @@
                 </Pane>
             </bottom>
             <top>
-                <Pane fx:id="pnCaption" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" prefHeight="41.0" prefWidth="810.0" style="-fx-background-color: #7A23AA;" BorderPane.alignment="CENTER">
+                <Pane fx:id="pnCaption" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" prefHeight="41.0" prefWidth="810.0" style="-fx-background-color: #8645aa;" BorderPane.alignment="CENTER">
                     <children>
                         <Label fx:id="lblCaption" layoutX="414.0" layoutY="10.0" onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" text="东软活力养老社区" textAlignment="RIGHT" textFill="WHITE">
                             <font>
